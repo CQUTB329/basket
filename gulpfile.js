@@ -17,10 +17,66 @@ var gulp = require('gulp'),
       browsers: ["ie >= 8", "ie_mob >= 10", "ff >= 26", "chrome >= 30", "safari >= 6", "opera >= 23", "ios >= 5", "android >= 2.3", "bb >= 10"]
     });
 
+
+var spritesmith = require('gulp.spritesmith');
+var merge = require('merge-stream');
+ 
+gulp.task('sprite', function () {
+
+
+  var spriteData = gulp.src('./public/img/sprite/*.png').pipe(spritesmith({
+    imgName: 'sprite.png',
+    cssName: 'sprite.less',
+    imgPath: '../img/sprite.png'
+  }));
+ 
+  // Pipe image stream through image optimizer and onto disk 
+  var imgStream = spriteData.img
+    // DEV: We must buffer our stream into a Buffer for `imagemin` 
+    // .pipe(buffer())
+    // .pipe(imagemin())
+    .pipe(gulp.dest('./public/img/'));
+ 
+  // Pipe CSS stream through CSS optimizer and onto disk 
+  var cssStream = spriteData.css
+    // .pipe(csso())
+    .pipe(gulp.dest('./app/less/'));
+ 
+  // Return a merged stream to handle both `end` events 
+  return merge(imgStream, cssStream);
+});
+
+
+gulp.task('pixi', function () {
+
+
+  var spriteData = gulp.src('./public/img/sprite/*.png').pipe(spritesmith({
+    imgName: 'sprite.png',
+    cssName: 'sprite.json',
+    imgPath: '../img/sprite.png'
+  }));
+ 
+  // Pipe image stream through image optimizer and onto disk 
+  var imgStream = spriteData.img
+    // DEV: We must buffer our stream into a Buffer for `imagemin` 
+    // .pipe(buffer())
+    // .pipe(imagemin())
+    .pipe(gulp.dest('./public/img/'));
+ 
+  // Pipe CSS stream through CSS optimizer and onto disk 
+  var cssStream = spriteData.css
+    // .pipe(csso())
+    .pipe(gulp.dest('./public/img/'));
+ 
+  // Return a merged stream to handle both `end` events 
+  return merge(imgStream, cssStream);
+});
+
+
 gulp.task('less', function() {
   gulp.src('./app/less/*.less')
     .pipe(less({
-      plugins: [autoprefix, cleancss],
+      plugins: [autoprefix],
       paths: [path.join(__dirname, 'less', 'includes')]
     }))
     .pipe(gulp.dest('./public/css'));
@@ -40,7 +96,7 @@ gulp.task('css',function(){
 });
 
 // gulp.task("reload",function(){
-//    gulp.src(['./public/css/*.css','./index.html','./public/js/bundle.min.js']).pipe(connect.reload);
+//    gulp.src(['./public/css/*.css','./index.html','./public/js/bundle.js']).pipe(connect.reload);
 // });
 
 gulp.task('connect',function(){
@@ -67,9 +123,9 @@ gulp.task('watch', function() {
   // gulp.watch('./app/js/*.js',['browserify']);
   gulp.watch('./app/js/**/*.js',['browserify']);
   // gulp.watch('./public/js/bundle.min.js',['js']);
-  // gulp.watch('./index.html',['html']);
+  // gulp.watch('./public/index.html',['html']);
   // gulp.watch('./public/css/*.css',['css']);
-  // gulp.watch(['./public/css/*.css','./public/js/bundle.min.js','./index.html'],['reload']);
+  // gulp.watch(['./public/css/*.css','./public/js/bundle.js','./index.html'],['reload']);
 });
 
 gulp.task("htmlmin",function(){
@@ -80,14 +136,14 @@ gulp.task("htmlmin",function(){
 });
 
 gulp.task("cssmin",function(){
-  gulp.src(['./public/css/*.css',"!./public/css/*.min.css"]).
+  gulp.src(['./public/css/*.css','!./public/css/*.min.css']).
   pipe(cssmin()).
   pipe(rename({suffix: '.min'})).
   pipe(gulp.dest('./public/css'))
 });
 
 gulp.task("uglyfly",function(){
-  gulp.src(['./public/js/bundle.js',"!./public/js/*.min.js"]).
+  gulp.src(['./public/js/*.js','!./public/js/*.min.js']).
   pipe(uglyfly()).
   pipe(rename({suffix: '.min'})).
   pipe(gulp.dest('./public/js'))

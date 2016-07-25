@@ -1,0 +1,363 @@
+/*
+LESS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: @icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+@icon-home: x y offset_x offset_y width height total_width total_height image_path name;
+
+At the bottom of this section, we provide information about the spritesheet itself
+@spritesheet: width height image @spritesheet-sprites;
+*/
+@caa-name: 'caa';
+@caa-x: 1335px;
+@caa-y: 172px;
+@caa-offset-x: -1335px;
+@caa-offset-y: -172px;
+@caa-width: 35px;
+@caa-height: 67px;
+@caa-total-width: 1399px;
+@caa-total-height: 1218px;
+@caa-image: '../img/sprite.png';
+@caa: 1335px 172px -1335px -172px 35px 67px 1399px 1218px '../img/sprite.png' 'caa';
+@camera-name: 'camera';
+@camera-x: 1335px;
+@camera-y: 0px;
+@camera-offset-x: -1335px;
+@camera-offset-y: 0px;
+@camera-width: 64px;
+@camera-height: 172px;
+@camera-total-width: 1399px;
+@camera-total-height: 1218px;
+@camera-image: '../img/sprite.png';
+@camera: 1335px 0px -1335px 0px 64px 172px 1399px 1218px '../img/sprite.png' 'camera';
+@close-name: 'close';
+@close-x: 1335px;
+@close-y: 239px;
+@close-offset-x: -1335px;
+@close-offset-y: -239px;
+@close-width: 46px;
+@close-height: 45px;
+@close-total-width: 1399px;
+@close-total-height: 1218px;
+@close-image: '../img/sprite.png';
+@close: 1335px 239px -1335px -239px 46px 45px 1399px 1218px '../img/sprite.png' 'close';
+@double-name: 'double';
+@double-x: 1022px;
+@double-y: 690px;
+@double-offset-x: -1022px;
+@double-offset-y: -690px;
+@double-width: 213px;
+@double-height: 52px;
+@double-total-width: 1399px;
+@double-total-height: 1218px;
+@double-image: '../img/sprite.png';
+@double: 1022px 690px -1022px -690px 213px 52px 1399px 1218px '../img/sprite.png' 'double';
+@double-a-name: 'double_a';
+@double-a-x: 1022px;
+@double-a-y: 742px;
+@double-a-offset-x: -1022px;
+@double-a-offset-y: -742px;
+@double-a-width: 213px;
+@double-a-height: 52px;
+@double-a-total-width: 1399px;
+@double-a-total-height: 1218px;
+@double-a-image: '../img/sprite.png';
+@double-a: 1022px 742px -1022px -742px 213px 52px 1399px 1218px '../img/sprite.png' 'double_a';
+@m-arrow-name: 'm_arrow';
+@m-arrow-x: 1335px;
+@m-arrow-y: 284px;
+@m-arrow-offset-x: -1335px;
+@m-arrow-offset-y: -284px;
+@m-arrow-width: 26px;
+@m-arrow-height: 45px;
+@m-arrow-total-width: 1399px;
+@m-arrow-total-height: 1218px;
+@m-arrow-image: '../img/sprite.png';
+@m-arrow: 1335px 284px -1335px -284px 26px 45px 1399px 1218px '../img/sprite.png' 'm_arrow';
+@m-btn-name: 'm_btn';
+@m-btn-x: 0px;
+@m-btn-y: 1030px;
+@m-btn-offset-x: 0px;
+@m-btn-offset-y: -1030px;
+@m-btn-width: 188px;
+@m-btn-height: 188px;
+@m-btn-total-width: 1399px;
+@m-btn-total-height: 1218px;
+@m-btn-image: '../img/sprite.png';
+@m-btn: 0px 1030px 0px -1030px 188px 188px 1399px 1218px '../img/sprite.png' 'm_btn';
+@m-far-name: 'm_far';
+@m-far-x: 0px;
+@m-far-y: 0px;
+@m-far-offset-x: 0px;
+@m-far-offset-y: 0px;
+@m-far-width: 640px;
+@m-far-height: 354px;
+@m-far-total-width: 1399px;
+@m-far-total-height: 1218px;
+@m-far-image: '../img/sprite.png';
+@m-far: 0px 0px 0px 0px 640px 354px 1399px 1218px '../img/sprite.png' 'm_far';
+@m-m-name: 'm_m';
+@m-m-x: 382px;
+@m-m-y: 354px;
+@m-m-offset-x: -382px;
+@m-m-offset-y: -354px;
+@m-m-width: 640px;
+@m-m-height: 168px;
+@m-m-total-width: 1399px;
+@m-m-total-height: 1218px;
+@m-m-image: '../img/sprite.png';
+@m-m: 382px 354px -382px -354px 640px 168px 1399px 1218px '../img/sprite.png' 'm_m';
+@m-rear-name: 'm_rear';
+@m-rear-x: 0px;
+@m-rear-y: 899px;
+@m-rear-offset-x: 0px;
+@m-rear-offset-y: -899px;
+@m-rear-width: 640px;
+@m-rear-height: 131px;
+@m-rear-total-width: 1399px;
+@m-rear-total-height: 1218px;
+@m-rear-image: '../img/sprite.png';
+@m-rear: 0px 899px 0px -899px 640px 131px 1399px 1218px '../img/sprite.png' 'm_rear';
+@player-name: 'player';
+@player-x: 0px;
+@player-y: 354px;
+@player-offset-x: 0px;
+@player-offset-y: -354px;
+@player-width: 382px;
+@player-height: 545px;
+@player-total-width: 1399px;
+@player-total-height: 1218px;
+@player-image: '../img/sprite.png';
+@player: 0px 354px 0px -354px 382px 545px 1399px 1218px '../img/sprite.png' 'player';
+@s-arrow-name: 's_arrow';
+@s-arrow-x: 1370px;
+@s-arrow-y: 172px;
+@s-arrow-offset-x: -1370px;
+@s-arrow-offset-y: -172px;
+@s-arrow-width: 26px;
+@s-arrow-height: 45px;
+@s-arrow-total-width: 1399px;
+@s-arrow-total-height: 1218px;
+@s-arrow-image: '../img/sprite.png';
+@s-arrow: 1370px 172px -1370px -172px 26px 45px 1399px 1218px '../img/sprite.png' 's_arrow';
+@s-btn-name: 's_btn';
+@s-btn-x: 188px;
+@s-btn-y: 1030px;
+@s-btn-offset-x: -188px;
+@s-btn-offset-y: -1030px;
+@s-btn-width: 188px;
+@s-btn-height: 188px;
+@s-btn-total-width: 1399px;
+@s-btn-total-height: 1218px;
+@s-btn-image: '../img/sprite.png';
+@s-btn: 188px 1030px -188px -1030px 188px 188px 1399px 1218px '../img/sprite.png' 's_btn';
+@s-far-name: 's_far';
+@s-far-x: 640px;
+@s-far-y: 0px;
+@s-far-offset-x: -640px;
+@s-far-offset-y: 0px;
+@s-far-width: 640px;
+@s-far-height: 354px;
+@s-far-total-width: 1399px;
+@s-far-total-height: 1218px;
+@s-far-image: '../img/sprite.png';
+@s-far: 640px 0px -640px 0px 640px 354px 1399px 1218px '../img/sprite.png' 's_far';
+@s-m-name: 's_m';
+@s-m-x: 382px;
+@s-m-y: 522px;
+@s-m-offset-x: -382px;
+@s-m-offset-y: -522px;
+@s-m-width: 640px;
+@s-m-height: 168px;
+@s-m-total-width: 1399px;
+@s-m-total-height: 1218px;
+@s-m-image: '../img/sprite.png';
+@s-m: 382px 522px -382px -522px 640px 168px 1399px 1218px '../img/sprite.png' 's_m';
+@s-rear-name: 's_rear';
+@s-rear-x: 382px;
+@s-rear-y: 690px;
+@s-rear-offset-x: -382px;
+@s-rear-offset-y: -690px;
+@s-rear-width: 640px;
+@s-rear-height: 131px;
+@s-rear-total-width: 1399px;
+@s-rear-total-height: 1218px;
+@s-rear-image: '../img/sprite.png';
+@s-rear: 382px 690px -382px -690px 640px 131px 1399px 1218px '../img/sprite.png' 's_rear';
+@scores-name: 'scores';
+@scores-x: 382px;
+@scores-y: 821px;
+@scores-offset-x: -382px;
+@scores-offset-y: -821px;
+@scores-width: 601px;
+@scores-height: 60px;
+@scores-total-width: 1399px;
+@scores-total-height: 1218px;
+@scores-image: '../img/sprite.png';
+@scores: 382px 821px -382px -821px 601px 60px 1399px 1218px '../img/sprite.png' 'scores';
+@share-name: 'share';
+@share-x: 1280px;
+@share-y: 0px;
+@share-offset-x: -1280px;
+@share-offset-y: 0px;
+@share-width: 55px;
+@share-height: 375px;
+@share-total-width: 1399px;
+@share-total-height: 1218px;
+@share-image: '../img/sprite.png';
+@share: 1280px 0px -1280px 0px 55px 375px 1399px 1218px '../img/sprite.png' 'share';
+@shoot-name: 'shoot';
+@shoot-x: 1022px;
+@shoot-y: 522px;
+@shoot-offset-x: -1022px;
+@shoot-offset-y: -522px;
+@shoot-width: 183px;
+@shoot-height: 101px;
+@shoot-total-width: 1399px;
+@shoot-total-height: 1218px;
+@shoot-image: '../img/sprite.png';
+@shoot: 1022px 522px -1022px -522px 183px 101px 1399px 1218px '../img/sprite.png' 'shoot';
+@single-name: 'single';
+@single-x: 1022px;
+@single-y: 623px;
+@single-offset-x: -1022px;
+@single-offset-y: -623px;
+@single-width: 213px;
+@single-height: 52px;
+@single-total-width: 1399px;
+@single-total-height: 1218px;
+@single-image: '../img/sprite.png';
+@single: 1022px 623px -1022px -623px 213px 52px 1399px 1218px '../img/sprite.png' 'single';
+@single-a-name: 'single_a';
+@single-a-x: 983px;
+@single-a-y: 821px;
+@single-a-offset-x: -983px;
+@single-a-offset-y: -821px;
+@single-a-width: 213px;
+@single-a-height: 52px;
+@single-a-total-width: 1399px;
+@single-a-total-height: 1218px;
+@single-a-image: '../img/sprite.png';
+@single-a: 983px 821px -983px -821px 213px 52px 1399px 1218px '../img/sprite.png' 'single_a';
+@sohu-name: 'sohu';
+@sohu-x: 714px;
+@sohu-y: 1030px;
+@sohu-offset-x: -714px;
+@sohu-offset-y: -1030px;
+@sohu-width: 114px;
+@sohu-height: 57px;
+@sohu-total-width: 1399px;
+@sohu-total-height: 1218px;
+@sohu-image: '../img/sprite.png';
+@sohu: 714px 1030px -714px -1030px 114px 57px 1399px 1218px '../img/sprite.png' 'sohu';
+@start-name: 'start';
+@start-x: 1022px;
+@start-y: 354px;
+@start-offset-x: -1022px;
+@start-offset-y: -354px;
+@start-width: 244px;
+@start-height: 119px;
+@start-total-width: 1399px;
+@start-total-height: 1218px;
+@start-image: '../img/sprite.png';
+@start: 1022px 354px -1022px -354px 244px 119px 1399px 1218px '../img/sprite.png' 'start';
+@title-name: 'title';
+@title-x: 640px;
+@title-y: 899px;
+@title-offset-x: -640px;
+@title-offset-y: -899px;
+@title-width: 557px;
+@title-height: 128px;
+@title-total-width: 1399px;
+@title-total-height: 1218px;
+@title-image: '../img/sprite.png';
+@title: 640px 899px -640px -899px 557px 128px 1399px 1218px '../img/sprite.png' 'title';
+@title-doc-name: 'title_doc';
+@title-doc-x: 376px;
+@title-doc-y: 1030px;
+@title-doc-offset-x: -376px;
+@title-doc-offset-y: -1030px;
+@title-doc-width: 338px;
+@title-doc-height: 66px;
+@title-doc-total-width: 1399px;
+@title-doc-total-height: 1218px;
+@title-doc-image: '../img/sprite.png';
+@title-doc: 376px 1030px -376px -1030px 338px 66px 1399px 1218px '../img/sprite.png' 'title_doc';
+@spritesheet-width: 1399px;
+@spritesheet-height: 1218px;
+@spritesheet-image: '../img/sprite.png';
+@spritesheet-sprites: @caa @camera @close @double @double-a @m-arrow @m-btn @m-far @m-m @m-rear @player @s-arrow @s-btn @s-far @s-m @s-rear @scores @share @shoot @single @single-a @sohu @start @title @title-doc;
+@spritesheet: 1399px 1218px '../img/sprite.png' @spritesheet-sprites;
+
+/*
+The provided classes are intended to be used with the array-like variables
+
+.icon-home {
+  .sprite-width(@icon-home);
+}
+.icon-email {
+  .sprite(@icon-email);
+}
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.sprite-width(@sprite) {
+  width: extract(@sprite, 5);
+}
+
+.sprite-height(@sprite) {
+  height: extract(@sprite, 6);
+}
+
+.sprite-position(@sprite) {
+  @sprite-offset-x: extract(@sprite, 3);
+  @sprite-offset-y: extract(@sprite, 4);
+  background-position: @sprite-offset-x @sprite-offset-y;
+}
+
+.sprite-image(@sprite) {
+  @sprite-image: extract(@sprite, 9);
+  @sprite-image-bare: ~`"@{sprite-image}".slice(1, -1)`;
+  background-image: url(@sprite-image-bare);
+}
+
+.sprite(@sprite) {
+  .sprite-image(@sprite);
+  .sprite-position(@sprite);
+  .sprite-width(@sprite);
+  .sprite-height(@sprite);
+}
+
+/*
+The `.sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of LESS
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+.sprites(@spritesheet-sprites);
+*/
+.sprites(@sprites, @i: 1) when (@i <= length(@sprites)) {
+  @sprite: extract(@sprites, @i);
+  @sprite-name: e(extract(@sprite, 10));
+  .@{sprite-name} {
+    .sprite(@sprite);
+  }
+  .sprites(@sprites, @i + 1);
+}

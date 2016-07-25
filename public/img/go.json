@@ -1,0 +1,81 @@
+{
+	"frames": {
+
+	
+
+		"countDown2_1":{
+			"frame": {"x":0,"y":0,"w":450,"h":223},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":450,"h":223},
+			"sourceSize": {"w":450,"h":223}
+		},
+		"countDown2_2":{
+			"frame": {"x":450,"y":0,"w":450,"h":223},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":450,"y":230,"w":450,"h":223},
+			"sourceSize": {"w":450,"h":223}
+		},
+		"countDown2_3":{
+			"frame": {"x":900,"y":0,"w":450,"h":223},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":900,"y":230,"w":450,"h":223},
+			"sourceSize": {"w":450,"h":223}
+		},
+		"countDown2_4":{
+			"frame": {"x":1350,"y":0,"w":450,"h":223},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":1350,"y":230,"w":450,"h":223},
+			"sourceSize": {"w":450,"h":223}
+		},
+
+
+
+
+
+		"countDown1":{
+			"frame": {"x":0,"y":374,"w":450,"h":223},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":374,"w":450,"h":223},
+			"sourceSize": {"w":450,"h":223}
+		},
+		"countDown2":{
+			"frame": {"x":450,"y":374,"w":450,"h":223},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":450,"y":374,"w":450,"h":223},
+			"sourceSize": {"w":450,"h":223}
+		},
+		"countDown3":{
+			"frame": {"x":900,"y":374,"w":450,"h":223},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":900,"y":374,"w":450,"h":223},
+			"sourceSize": {"w":450,"h":223}
+		},
+		"countDown4":{
+			"frame": {"x":1350,"y":374,"w":450,"h":223},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":1350,"y":374,"w":450,"h":223},
+			"sourceSize": {"w":450,"h":223}
+		}
+		
+
+	},
+
+
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker ",
+		"version": "1.0",
+		"image": "go.png",
+		"format": "RGBA8888",
+		"size": {"w":1800,"h":1286},
+		"scale": "1",
+		"smartupdate": "$TexturePacker:SmartUpdate:68947b15bb7efc40be030c076d92ff6a:7a7176ee4a47114ab8e7e8ecb8c361fc:fac4f515bf266e4f4ed746fa4fe7351a$"
+	}
+}

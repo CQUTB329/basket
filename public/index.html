@@ -3,30 +3,268 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <script type="text/javascript">
-(function(){
-  var s = document.documentElement.clientWidth/640;
-  document.querySelector("meta[name='viewport']").setAttribute("content","width=device-width, initial-scale="+s+", minimum-scale="+s+", maximum-scale="+s+",minimal-ui");
-})();
-</script>
-  <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/normalize/3.0.2/normalize.css">
-  <link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
-  <link rel="stylesheet" type="text/css" href="./css/style.css">
-  <!-- <link rel="stylesheet" type="text/css" href="http://news.sohu.com/upload/commonzzx/normal.css"> -->
-  <link rel="stylesheet" href="./css/react-slick.css">
-  <link rel="stylesheet" href="http://react-bootstrap.github.io/assets/bundle.css">
-  <link rel="stylesheet" href="./css/swiper.min.css">
 
-  <title>soojung</title>
+
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+  <style type="text/css">
+    /*声明 WebFont*/
+@font-face {
+  font-family: 'FZLTH';
+  src: url('./font/FZLTH.eot');
+  src:
+    url('./font/FZLTH.eot?#font-spider') format('embedded-opentype'),
+    url('./font/FZLTH.woff') format('woff'),
+    url('./font/FZLTH.ttf') format('truetype'),
+    url('./font/FZLTH.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'FZLTCH';
+  src: url('./font/FZLTCH.eot');
+  src:
+    url('./font/FZLTCH.eot?#font-spider') format('embedded-opentype'),
+    url('./font/FZLTCH.woff') format('woff'),
+    url('./font/FZLTCH.ttf') format('truetype'),
+    url('./font/FZLTCH.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'FUTURA';
+  src: url('./font/FUTURA.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*使用选择器指定字体*/
+body{
+    font-family: 'FZLTH';
+}
+
+
+#result{
+  font-family: 'FZLTCH';
+}
+  </style>
+  <title>奥运会跑步</title>
+
 </head>
 
-<body ontouchmove="event.preventDefault();">
-  <div class="all" id="all"></div> 
+  <script src="http://news.sohu.com/upload/yifengjiashuzzx/js/preload.js"></script>
+
+<body ontouchmove="event.preventDefault();" >
+  <div class="loading">
+    <div class="loading_player"></div>
+    <div class="progress-num">0%</div>
+  </div>
+
+
+  
+  <div class="page1">
+    <div class="sohu"></div>
+    <div class="titleGame"></div>
+    <div class="title_doc"></div>
+    <div class="single active"></div>
+    <div class="double"></div>
+
+    <div class="player"></div>
+    <div class="start"></div>
+  </div>
+
+
+  <div class="gameWrapper" id="gameWrapper"></div> 
+
+  <script type="text/javascript">
+
+   
+
+    function pageUtil(selector){
+      this.ele = document.querySelectorAll(selector)[0];
+      this.scaleNum = document.documentElement.clientWidth/640;
+      return this;
+    }
+    pageUtil.prototype.response = function(selector){
+          this.ele.style.cssText = "-webkit-transform-origin: 0 0 0px; -webkit-transform: scale("+this.scaleNum+");position: absolute;width:640px;height:1136px";
+          return this;
+    }
+    pageUtil.prototype.rotate = function(){
+      this.ele["style"]["cssText"] = "width: "+1136+"px;height: "+640+"px;transform:rotate(90deg) translate(-50%,-50%);"+
+      "transform-origin:0 0; position: absolute; top: 50%; left: 50%;"
+      return this;
+    }
+
+
+
+
+    new pageUtil(".loading").response();
+      var loader = new resLoader({
+      resources: [
+        'http://sports.sohu.com/upload/yursile/running1/img/players.png',
+        'http://sports.sohu.com/upload/yursile/running1/img/page1.png',
+        'http://sports.sohu.com/upload/yursile/running1/img/resultbg.png',
+        'http://sports.sohu.com/upload/yursile/running1/img/results.png',
+      ],
+      onStart: function(total) {},
+      onProgress: function(current, total) {
+        var percent = parseInt(current / total * 100) + '%';
+        document.querySelector('.progress-num').innerHTML = percent;
+      
+      },
+      onComplete: function(total) {
+        
+        document.querySelector('.loading').style.display = "none";
+      }
+    });
+    loader.start();
+
+    window.pas = new pageUtil(".gameWrapper");
+    pas.response();
+
+
+     
+  </script>
+
+
+
+  <div id="specification1">
+    <div class="shoot"></div>
+    <div class="detail">玩法说明</div>
+    <div class="title">单人玩家</div>
+    
+    <div class="doc_box">
+      <div ><span style="color:#ffd92c">点击飞盘</span>,</div>
+      <div >以最快的速度，</div>
+      <div >最准的枪法，</div>
+      <div >射中更多的飞盘~~</div>
+    </div>
+  </div>
+
+
+  <div id="specification2">
+    <div class="close"></div>
+
+    <div class="detail">玩法说明</div>
+    <div class="title">双人玩家</div>
+    
+    <div class="doc_box">
+      <div class="p1">邀请好友微信扫描二维码，</div>
+      <div>进入双人玩家模式；</div>
+      <div class="p2"><span style="color:#ffd92c">点击飞盘</span>,</div>
+      <div >以最快的速度，最准的枪法，</div>
+    
+      <div >射中更多的飞盘~~</div>
+       <div >快和你的小伙伴一比高下吧~~</div>
+    </div>
+
+    <div class="ewm_wrapper">
+      <div class="ewm_box"></div>
+      <div class="scanme">扫 我 扫 我 扫 我</div>
+    </div>
+
+  </div>
+
+
+  <div id="match_success">
+    <div class="run"></div>
+  </div>
+
+
+  <div class="gameover">
+    <div class="overbg"></div>
+  </div>
+
+  <div id="result">
+    <div style="display:none">0123456789.你在穿杨射柳的比赛中击中XX飞碟，枪法堪比王义夫、许海峰、杜丽、庞伟，人名随机。枪法堪比黄忠、许三多、后羿、小李广花荣，人名随机枪法堪比特种兵、雪豹突击队，人名随机枪法还需多加练习……这枪法简直没谁了……我</div>
+    <div class="wrapper">
+      <div class="shooted">射击比赛您射中：</div>
+      <div id="main_num">36枚</div>
+
+      <div class="second_s">好友成绩：<span id="second_num">36枚</span></div>
+      
+
+      <div class="doc double_p">这命中率，简直了！！</div>
+
+      <div class="agian"></div>
+      <div class="share"></div>
+      <div class="basketbal" data-url="#"></div>
+      <div class="shooting" data-url="#"></div>
+    </div>
+
+    <div class="shareCover">
+        <div class="shareFlag"></div>
+    </div>
+  </div>
+
+
+
 </body>
 
+
+<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script> -->
 <script type="text/javascript">
-  var baseURL = "http://news.sohu.com/upload/shuzizhidaozzx/dist/img/";
+  new pageUtil(".page1").response();
+  new pageUtil("#result").response();
+  new pageUtil("#specification1").response();
+  new pageUtil("#specification2").response();
+  new pageUtil("#match_success").response();
+
+  new pageUtil(".gameover").response();
+
+
+
+  document.querySelector(".agian").addEventListener("click",function(){
+    document.querySelector("#result").style.display = "none";
+    document.querySelector(".page1").style.display = "block";
+    document.querySelector(".second_s").style.display = "none";
+    document.querySelector(".doc").className = "doc";
+  },false);
+
+
+  document.querySelector("#specification1 .shoot").addEventListener("click",function(){
+      document.querySelector("#specification1").style.display = "none";
+      window.game.ready();
+  },false);
+
+  // document.querySelector("#match_success .close").addEventListener("click",function(){
+  //     window.game.readyToPlay();
+  // },false);
+
+  document.querySelector(".run").addEventListener("click",function(){
+      window.game.readyToPlay();
+  },false);
+
+  document.querySelector("#specification2 .shoot").addEventListener("click",function(){
+      document.querySelector("#specification2").style.display = "none";
+  },false);
+
+  document.querySelector(".basketbal").addEventListener("click",function(){
+    document.location.href = this.dataset.url;
+  },false)
+  document.querySelector(".shooting").addEventListener("click",function(){
+    document.location.href = this.dataset.url;
+  },false)
+
+  document.querySelector(".share").addEventListener("click",function(){
+    document.querySelector(".shareCover").style.display= "block";
+  },false)
+
+  document.querySelector(".shareCover").addEventListener("click",function(){
+    document.querySelector(".shareCover").style.display= "none";
+  },false)
+
+
+
+  
+
+
 </script>
+<script type="text/javascript" src="./js/qrcode.min.js"></script>
 <script type="text/javascript" src="./js/bundle.js"></script>
 
 </html>
