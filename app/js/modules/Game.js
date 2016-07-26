@@ -1,4 +1,4 @@
-var Control = require("./Controler.js")
+var Controler = require("./Controler.js")
 var TWEEN = require("tween.js")
 // var $ = window.$;
 function Game(role,type,stage,renderer,ui){
@@ -33,6 +33,10 @@ Game.prototype.init = function(){
 	// this.ui.addClouds();
 	this.ui.addScore();
 	this.ui.addTime();
+	// this.ui.addCamera();
+	this.ui.takePhoto();
+
+	
 	// this.ui.addFire();
 	// this.ui.addPlayer(this.role);
 	
@@ -44,6 +48,8 @@ Game.prototype.init = function(){
 	// 	this.stage.addChild(saucers[i]);
 	// }
 
+
+	this.controler = new Controler(this,this.role);
 	this.update();
 	
 }
@@ -105,21 +111,28 @@ Game.prototype.begin = function(fn){
 	this.stage.removeChild(this.countDown);
 	this.state = "begin";
 
+
+
+	// this.init();
+	this.controler.start();
+
 	//fire when click
 	this.stage.interactive = true;
-	this.stage.on("touchstart",function(){
-		this.ui.player.fire();
-		setTimeout(function(){
-			this.ui.player.hold();
-		}.bind(this),200);
-	}.bind(this))
+	// this.stage.on("touchstart",function(){
+	// 	this.ui.player.fire();
+	// 	setTimeout(function(){
+	// 		this.ui.player.hold();
+	// 	}.bind(this),200);
+	// }.bind(this))
 
 	// this.saucerPool.init();
 	this.score = 0;
 	//update distance and time
 
 		//update clouds
-	// this.ui.update(TWEEN);
+	this.ui.update(TWEEN);
+
+	// this.ui.crowd.update(TWEEN);
 }
 
 
@@ -130,7 +143,7 @@ Game.prototype.update = function(){
 	//test
 	// update crowd
 
-	this.ui.update();
+	// this.ui.update(TWEEN);
 
 
 	TWEEN.update();

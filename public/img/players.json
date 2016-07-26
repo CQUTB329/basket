@@ -1,0 +1,89 @@
+{
+	"frames": {
+
+		"m_player1":{
+			"frame": {"x":0,"y":205,"w":287,"h":619},
+			"rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":205,"w":287,"h":619},
+            "sourceSize": {"w":287,"h":619}
+		},
+		"m_player2":{
+			"frame": {"x":311,"y":205,"w":287,"h":619},
+			"rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":311,"y":172,"w":287,"h":619},
+            "sourceSize": {"w":287,"h":619}
+		},
+
+		"s_player1":{
+			"frame": {"x":0,"y":864,"w":287,"h":619},
+			"rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":864,"w":287,"h":619},
+            "sourceSize": {"w":287,"h":619}
+		},
+		"s_player2":{
+			"frame": {"x":311,"y":864,"w":287,"h":619},
+			"rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":311,"y":864,"w":287,"h":619},
+            "sourceSize": {"w":287,"h":619}
+		},
+
+		"ball1":{
+			"frame": {"x":0,"y":0,"w":166,"h":165},
+			"rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":166,"h":165},
+            "sourceSize": {"w":166,"h":165}
+		},
+		"ball2":{
+			"frame": {"x":166,"y":0,"w":166,"h":165},
+			"rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":166,"y":0,"w":166,"h":165},
+            "sourceSize": {"w":166,"h":165}
+		},
+		"ball3":{
+			"frame": {"x":332,"y":0,"w":166,"h":165},
+			"rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":332,"y":0,"w":166,"h":165},
+            "sourceSize": {"w":166,"h":165}
+		},
+		"ball4":{
+			"frame": {"x":498,"y":0,"w":166,"h":165},
+				"rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":498,"y":0,"w":166,"h":165},
+            "sourceSize": {"w":166,"h":165}
+		},
+		"ball5":{
+			"frame": {"x":664,"y":0,"w":166,"h":165},
+				"rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":664,"y":0,"w":166,"h":165},
+            "sourceSize": {"w":166,"h":165}
+		},
+		"ball6":{
+			"frame": {"x":830,"y":0,"w":166,"h":165},
+				"rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":830,"y":0,"w":166,"h":165},
+            "sourceSize": {"w":166,"h":165}
+		}
+
+	},
+
+
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker ",
+		"version": "1.0",
+		"image": "players.png",
+		"format": "RGBA8888",
+		"size": {"w":996,"h":1483},
+		"scale": "1",
+		"smartupdate": "$TexturePacker:SmartUpdate:68947b15bb7efc40be030c076d92ff6a:7a7176ee4a47114ab8e7e8ecb8c361fc:fac4f515bf266e4f4ed746fa4fe7351a$"
+	}
+}

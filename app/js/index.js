@@ -19,9 +19,8 @@ function Main(){
   this.loadSpriteSheet();
 }
 
-
 Main.prototype.loadSpriteSheet = function(){
-  var assetsToLoad = ["img/go.json","img/sprite.json"];
+  var assetsToLoad = ["img/go.json","img/sprite.json","img/players.json"];
   var loader = new PIXI.loaders.Loader();
   loader.add(assetsToLoad);
   // loader.on("progress",this.loading);

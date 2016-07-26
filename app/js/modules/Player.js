@@ -1,12 +1,11 @@
 
-function Player(role,fires){
+function Player(role,ball){
 	this.role = role;
-	console.log(this.role)
-	this.fires = fires;
+	this.ball = ball;
 
+	// this.balls = 
 
-	var cdt = (this.role==1?"main_player":"second_player");
-	console.log(cdt);
+	var cdt = (this.role==1?"m_player":"s_player");
 	var textures = [];
 	for (let i=1; i < 3; i++){
 	     let texture = PIXI.Texture.fromFrame(cdt+i);
@@ -15,16 +14,16 @@ function Player(role,fires){
 
 
 	PIXI.extras.MovieClip.call(this,textures);
-	this.animationSpeed = 0.2;
-	// this.loop = false;
+	this.animationSpeed = 0.08;
+
 	this.position.x = Player.CX;
 	this.position.y = Player.CY;
-	// this.play();
-	// 
+	this.loop = false;
+
 	
 }
-Player.CX = 35;
-Player.CY = 670;
+Player.CX = 180;
+Player.CY = 500;
 
 Player.constructor = Player;
 Player.prototype = Object.create(PIXI.extras.MovieClip.prototype);
@@ -33,18 +32,20 @@ Player.prototype = Object.create(PIXI.extras.MovieClip.prototype);
 
 
 
+Player.prototype.shoot = function(){
+	this.gotoAndPlay(0);
 
-Player.prototype.fire = function(){
-	this.play();
-	this.fires.alpha = 1;
-	this.fires.play();
+	this.ball.shoot();
+
+	setTimeout(function(){
+		this.hold();
+	}.bind(this),300);
 
 }
 
 Player.prototype.hold = function(){
-	this.stop();
-	this.fires.alpha = 0;
-	this.fires.stop();
+	this.gotoAndStop(1);
+	// this.ball.stop();
 
 }
 module.exports = Player;

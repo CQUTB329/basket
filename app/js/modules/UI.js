@@ -1,10 +1,11 @@
-var TWEEN;
+var TWEEN = require("tween.js");
 var Player = require("./Player.js")
-var Fires = require("./Fires.js")
+// var Fires = require("./Fires.js")
 var WIDTH = window.SCREEN_WIDTH;
 var HEIGHT = window.SCREEN_HEIGHT;
 var FLOORY = 620;
 var BARY = 475;
+
 
 var CrowdFactory = require("./CrowdFactory.js")
 
@@ -20,7 +21,7 @@ var STYLE_X = {
 	font : 'bold italic 40px Arial'
 }
 
-function UI(stage,role){
+function UI(stage,role,tween){
 	this.stage = stage;
 
 	// this.addBG();
@@ -28,47 +29,16 @@ function UI(stage,role){
 	// this.addTime();
 
 
-	this.score = "00";
+	this.score = 0;
 	this.time = 15;
 	this.role = role;
+
+	// TWEEN = tween;
 }
 
 PIXI.SCALE_MODES = "LINEAR";
 
-
-UI.prototype.addClouds = function(){
-	this.clouds = new PIXI.Container();
-	var cloud1 = new PIXI.Sprite.fromFrame("cloud");
-	cloud1.position.x = 30;
-	cloud1.position.y = 50;
-	this.clouds.addChild(cloud1);
-
-	var cloud2 = new PIXI.Sprite.fromFrame("cloud");
-	cloud2.position.x = 400;
-	cloud2.position.y = 230;
-	this.clouds.addChild(cloud2);
-
-
-	var cloud3 = new PIXI.Sprite.fromFrame("cloud");
-	cloud3.position.x = 760;
-	cloud3.position.y = 60;
-	this.clouds.addChild(cloud3);
-
-	this.clouds.position.x = 0;
-
-	this.stage.addChild(this.clouds);
-
-}
-
-UI.prototype.updateClouds = function(){
-	var tween = new TWEEN.Tween(this.clouds.position);
-	tween.to({x:-400},25000);
-	tween.repeat(Infinity);
-	tween.yoyo(true);
-	tween.start();
-}
-
-
+UI.CAMERA_MAX_Y = 300;
 
 
 UI.prototype.addBG = function(){
@@ -90,10 +60,10 @@ UI.prototype.addPlayer = function(){
 	this.stage.addChild(this.player);
 }
 
-UI.prototype.addFire = function(){
-	this.fires = new Fires();
-	this.stage.addChild(this.fires);
-}
+// UI.prototype.addFire = function(){
+// 	this.fires = new Fires();
+// 	this.stage.addChild(this.fires);
+// }
 
 
 
@@ -109,14 +79,18 @@ UI.prototype.addScore = function(){
 	this.scoreText.x = 530;
 	this.scoreText.y = 10;
 	this.stage.addChild(this.scoreText);
-
-
 	
+}
+
+UI.prototype.plusScore = function(){
+	this.setScore(++this.score);
 }
 
 
 UI.prototype.addCrowd = function(){
-	this.crowd = new CrowdFactory(this.role,this.stage);
+	this.addCamera();
+	console.log(this.role)
+	this.crowd = new CrowdFactory(this.role,this.stage,this.camera);
 }
 
 UI.prototype.addTime = function(){
@@ -171,14 +145,84 @@ UI.prototype.over = function(){
 UI.prototype.update = function(tween){
 	this.state = "update";
 	// TWEEN = tween;
-	// this.updateTime();
+	this.updateTime();
 	// this.updateClouds();
-	this.crowd.update();
+	this.crowd.update(tween);
 }
 
 UI.prototype.again = function(){
 	this.TimeText.text = this.time = "0.00";
 	this.scoreText = this.score = "000";
+}
+
+
+UI.prototype.addCamera = function(){
+	this.camera = new PIXI.Sprite.fromFrame("camera");
+	this.camera.position.y = UI.CAMERA_MAX_Y;
+	this.picturing = new PIXI.Sprite.fromFrame("caa");
+	this.picturing.position.x = 80;
+	this.picturing.position.y = -20;
+	this.picturing.alpha = 0;
+	// this.picturing.scale = 0.1;
+	this.camera.addChild(this.picturing);
+	// this.stage.addChild(this.camera);
+}
+
+
+
+UI.prototype.takePhoto = function(){
+	var tween = new TWEEN.Tween(this.camera.position);
+	var coordinate = generatePicturingPosition();
+	this.camera.position.x = coordinate.x;
+	tween.to({y:coordinate.y},1000)
+	.onComplete(this.caa.bind(this));
+
+	tween.start();
+}
+
+UI.prototype.caa = function(){
+	this.caaTween = new TWEEN.Tween(this.picturing);
+	this.caaTween.to({alpha:1},300).
+	onComplete(this.hideCamera.bind(this)).
+	start();
+
+}
+
+UI.prototype.hideCamera = function(){
+	this.picturing.alpha = 0;
+	// this.picturing.scale = 0.1;
+	var tween = new TWEEN.Tween(this.camera.position);
+	tween.to({y:UI.CAMERA_MAX_Y},1000).
+	onComplete(function(){
+		this.takePhoto();
+	}.bind(this),2000).
+	delay(1000);
+	tween.start();
+}
+
+UI.prototype.stopAnimation = function(){
+	webkitCancelAnimationFrame(this.timer);
+	this.timer = null;
+}
+
+
+
+
+function generatePicturingPosition(){
+	var minX = 0;
+	var maxX = 600;
+	var minY = 120;
+	var maxY = 250;
+
+	var x = Math.floor(Math.random()*maxX);
+	var y = Math.max(Math.floor(Math.random()*maxY),minY);
+
+	// var y = Math.random()*maxY;
+	var coordinate = {
+		"x":x,
+		"y":y
+	};
+	return coordinate;
 }
 
 

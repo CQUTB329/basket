@@ -1,99 +1,146 @@
-// var Controler = require("./js")
+var START_X = 530;
+var START_Y = 252;
+var ARROW_L = 43;
+var TIME_L = 557;
+var END_Y = START_Y+TIME_L-ARROW_L;
 
 
+var S_START = 350;
+var S_END = 430;
 
+var TWEEN = require("tween.js")
+var Ball = require("./Ball.js")
+var Player = require("./Player.js")
 
+class Controler{
+	constructor(game,role){
+		this.game = game;
+		this.role = role;
+		this.preTime = 0;
 
-function Controler(game,role){
-	this.game = game;
-	this.role = role;
-	this.preTime = 0;
+		this.stage = game.stage;
 
-	this.addButtons();
-}
+	
+		this.addArrow();
 
-Controler.timeToSpeed = function(time){
-	var speed = 0;
-	if(time<180){
-		speed = 11
-	}else if(time>=180&&time<=190){
-		speed = 10
-	}else if(time>=190&&time<=200){
-		speed = 9
-	}else if(time>=200&&time<=210){
-		speed = 8;
-	}else if(time == 0){
-		speed = 0;
-	}else{
-		speed = 7;
+		this.addBall();
+		this.addPlayer();
+		this.addButtons();
 	}
 
-	return speed;
-
-}
 
 
-Controler.prototype.speedUp = function(){
-	if(this.preTime===0){
-		this.prevTime = this.currentTime;
+
+	shoot(){
+		if(this.shootable){
+			if(this.arrow.position.y<S_START){
+				this.player.shoot(1);
+			}else if(this.arrow.position.y>S_END){
+				this.player.shoot(2)
+				/**
+				 * test score
+				 */
+				setTimeout(function(){
+					this.game.ui.plusScore();
+				}.bind(this),300);
+			}else{
+				this.player.shoot();
+
+			}
+		
+		}
+
+		this.shootable = false;
+		this.button.interactive = false;
 	}
-	this.diffTime = this.currentTime - this.preTime;
+
+	start(){
+		this.shootable = true;
+		this.button.interactive = true;
+		var tween = new TWEEN.Tween(this.arrow.position);
+		tween.to({y:END_Y},1000)
+		.onComplete(this.end.bind(this))
+		
+		tween.start();
+
+	}
+
+	end(){
+		//do something
+		//
+		//
+		//
+		this.shootable = false;
+		this.button.interactive = false;
+		// setTimeout(function(){
+			this.arrow.position.y = START_Y;
+			this.start();
 
 
-	var speed = Controler.timeToSpeed(this.diffTime);
+		// }.bind(this),1000);
+	
 
-	// if(this.role==1){
-		this.game.players[0].setSpeed(speed);
-	// }else{
-	// 	this.game.players[1].setSpeed(speed);
-	// }
+	}
 
-	this.preTime = this.currentTime;
+	again(){
+
+	}
+
+	addArrow(){
+		if(this.role==1){
+			this.arrow = new PIXI.Sprite.fromFrame("m_arrow")
+		}else{
+			this.arrow = new PIXI.Sprite.fromFrame("s_arrow")
+		}
+		this.arrow.position.x = START_X;
+		this.arrow.position.y = START_Y;
+		this.stage.addChild(this.arrow);
+	}
+
+
+	addButtons(){
+		var _this = this;
+		if(this.role==1){
+			this.button = new PIXI.Sprite.fromFrame("m_btn");
+		}else{
+			this.button = new PIXI.Sprite.fromFrame("s_btn");
+		}
+
+
+		this.button.interactive = true;
+		this.button.position.x = 216;
+		this.button.position.y = 700;
+
+		this.stage.addChild(this.button);
+
+
+
+		this.button.on("touchstart",function(){
+			this.alpha = 0.5;
+			_this.shoot();
+			setTimeout(function(){
+				this.alpha = 1;
+			}.bind(this),100);
+		});
+		// this.button.on("touchend",function(){
+		// 	this.alpha = 1;
+		// 	// _this.
+		// })
+	}
+
+	addPlayer(){
+		this.player = new Player(this.role,this.ball);
+		this.stage.addChild(this.player);
+	}
+
+	addBall(){
+		this.ball = new Ball();
+		this.stage.addChild(this.ball);
+	}
 }
 
 
-Controler.prototype.addButtons = function(){
-	var _this = this;
-	var button1 = new PIXI.Sprite.fromFrame("button1");
-	button1.interactive = true;
-	button1.position.x = 0;
-	button1.position.y = 790;
-	this.game.scroller.stage.addChild(button1);
 
 
-	var button2 = new PIXI.Sprite.fromFrame("button2");
-	button2.interactive = true;
-	button2.position.x = 323;
-	button2.position.y = 790;
-	this.game.scroller.stage.addChild(button2);
-
-	button1.on("touchstart",function(){
-		_this.currentTime = new Date().getTime();
-		// this.texture = new PIXI.Texture.fromFrame("button1_active");
-		this.alpha = 0.5;
-		_this.speedUp();
-	});
-	button1.on("touchend",function(){
-		// this.texture = new PIXI.Texture.fromFrame("button1");
-		this.alpha = 1;
-	})
-
-
-	button2.on("touchstart",function(){
-		_this.currentTime = new Date().getTime();
-		// this.texture = new PIXI.Texture.fromFrame("button1_active");
-		this.alpha = 0.5;
-		_this.speedUp();
-	});
-	button2.on("touchend",function(){
-		// this.texture = new PIXI.Texture.fromFrame("button1");
-		this.alpha = 1;
-	})
-}
-
-
-Controler.prototype.again = function(){
-	this.preTime = 0;
-}
 
 module.exports = Controler;

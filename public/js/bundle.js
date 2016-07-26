@@ -22,7 +22,7 @@ function Main() {
 }
 
 Main.prototype.loadSpriteSheet = function () {
-  var assetsToLoad = ["img/go.json", "img/sprite.json"];
+  var assetsToLoad = ["img/go.json", "img/sprite.json", "img/players.json"];
   var loader = new PIXI.loaders.Loader();
   loader.add(assetsToLoad);
   // loader.on("progress",this.loading);
@@ -138,96 +138,325 @@ window.main = new Main();
 },{"./modules/Game":5,"./modules/Page1.js":6,"./modules/Socket.js":8,"./modules/UI.js":9,"pixi.js":151}],2:[function(require,module,exports){
 "use strict";
 
-// var Controler = require("./js")
+var TWEEN = require("tween.js");
+function Ball() {
+	var textures = [];
+	for (var i = 1; i < 7; i++) {
+		var texture = PIXI.Texture.fromFrame("ball" + i);
+		textures.push(texture);
+	};
 
-function Controler(game, role) {
-	this.game = game;
-	this.role = role;
-	this.preTime = 0;
-
-	this.addButtons();
+	PIXI.extras.MovieClip.call(this, textures);
+	this.animationSpeed = 0.1;
+	this.position.x = 242;
+	this.position.y = 493;
 }
+var START_X = 242;
+var START_Y = 483;
+var TOP_Y = 200;
+var YES_Y = 300;
+var LEFT_X = 100;
+var DOWN_Y = 700;
+var RIGHT_X = 540;
+var CENTER_Y = 516;
 
-Controler.timeToSpeed = function (time) {
-	var speed = 0;
-	if (time < 180) {
-		speed = 11;
-	} else if (time >= 180 && time <= 190) {
-		speed = 10;
-	} else if (time >= 190 && time <= 200) {
-		speed = 9;
-	} else if (time >= 200 && time <= 210) {
-		speed = 8;
-	} else if (time == 0) {
-		speed = 0;
+Ball.prototype = Object.create(PIXI.extras.MovieClip.prototype);
+Ball.constructor = Ball;
+
+Ball.prototype.shoot = function (direction) {
+	this.play();
+	//shoot has completed
+	this.straight(direction);
+	setTimeout(function () {
+		this.reBack();
+	}.bind(this), 1000);
+	// tween.easing(tenStepEasing);
+};
+
+Ball.prototype.score = function () {
+	// this.position.y =
+};
+
+Ball.prototype.reBack = function () {
+	this.position.x = START_X;
+	this.position.y = START_Y;
+	this.alpha = 1;
+	this.scale.x = this.scale.y = 1;
+	this.stop();
+};
+
+Ball.prototype.straight = function (direction) {
+	this.t = 1;
+
+	// this.position.y +=
+	var straight = new TWEEN.Tween(this.position);
+
+	straight.easing(TWEEN.Easing.Elastic.InOut);
+
+	straight.to({
+		y: TOP_Y
+	}, 200);
+
+	straight.start();
+
+	if (!direction) {
+		straight.onComplete(function () {
+			this.goDown();
+		}.bind(this));
+
+		straight.onUpdate(function () {
+			this.t -= 0.05;
+			this.scale.y = this.scale.x = this.t;
+			this.position.x += this.t * 5;
+		}.bind(this));
+	} else if (direction == 1) {
+		straight.onComplete(function () {
+			this.goLeft();
+		}.bind(this));
+
+		straight.onUpdate(function () {
+			this.t -= 0.05;
+			this.scale.y = this.scale.x = this.t;
+			this.position.x -= this.t * 3;
+		}.bind(this));
 	} else {
-		speed = 7;
+		straight.onComplete(function () {
+			this.goRight();
+		}.bind(this));
+
+		straight.onUpdate(function () {
+			this.t -= 0.05;
+			this.scale.y = this.scale.x = this.t;
+			this.position.x += this.t * 15;
+		}.bind(this));
 	}
 
-	return speed;
+	// var down = new TWEEN.Tween(this.position)
+	// down.easing(TWEEN.Easing.Quintic.In)
+	// down.to({
+	// 	y:YES_Y
+	// },200)
+	// .onComplete(function(){
+	// 	this.alpha = 0
+	// }.bind(this));
 };
 
-Controler.prototype.speedUp = function () {
-	if (this.preTime === 0) {
-		this.prevTime = this.currentTime;
+Ball.prototype.goDown = function () {
+	var down = new TWEEN.Tween(this.position);
+	down.easing(TWEEN.Easing.Quintic.In);
+	down.to({
+		y: YES_Y
+	}, 200).onComplete(function () {
+		this.alpha = 0;
+		// this.
+	}.bind(this));
+	down.start();
+};
+
+Ball.prototype.goLeft = function () {
+	var downLeft = new TWEEN.Tween(this.position);
+	downLeft.easing(TWEEN.Easing.Cubic.In);
+	downLeft.to({
+		y: DOWN_Y
+	}, // x:LEFT_X
+	500).onUpdate(function () {
+		this.position.x -= 8;
+	}.bind(this)).onComplete(function () {
+		this.upLeft();
+	}.bind(this));
+	downLeft.start();
+};
+
+Ball.prototype.upLeft = function () {
+	var upleft = new TWEEN.Tween(this.position);
+	upleft.easing(TWEEN.Easing.Quintic.In);
+	upleft.to({
+		y: CENTER_Y,
+		x: -50
+	}, 200).onComplete(function () {
+		this.alpha = 0;
+	}.bind(this));
+	upleft.start();
+};
+
+Ball.prototype.goRight = function () {
+	var downLeft = new TWEEN.Tween(this.position);
+	downLeft.easing(TWEEN.Easing.Cubic.In);
+	downLeft.to({
+		y: DOWN_Y
+	}, // x:LEFT_X
+	500).onUpdate(function () {
+		this.position.x += 8;
+	}.bind(this)).onComplete(function () {
+		this.upRight();
+	}.bind(this));
+	downLeft.start();
+};
+
+Ball.prototype.upRight = function () {
+	var upleft = new TWEEN.Tween(this.position);
+	upleft.easing(TWEEN.Easing.Quintic.In);
+	upleft.to({
+		y: CENTER_Y,
+		x: 700
+	}, 200).onComplete(function () {
+		this.alpha = 0;
+	}.bind(this));
+	upleft.start();
+};
+
+// function tenStepEasing(k) {
+//     return Math.floor(k * 10) / 10;
+// }
+module.exports = Ball;
+
+},{"tween.js":190}],3:[function(require,module,exports){
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var START_X = 530;
+var START_Y = 252;
+var ARROW_L = 43;
+var TIME_L = 557;
+var END_Y = START_Y + TIME_L - ARROW_L;
+
+var S_START = 350;
+var S_END = 430;
+
+var TWEEN = require("tween.js");
+var Ball = require("./Ball.js");
+var Player = require("./Player.js");
+
+var Controler = function () {
+	function Controler(game, role) {
+		_classCallCheck(this, Controler);
+
+		this.game = game;
+		this.role = role;
+		this.preTime = 0;
+
+		this.stage = game.stage;
+
+		this.addArrow();
+
+		this.addBall();
+		this.addPlayer();
+		this.addButtons();
 	}
-	this.diffTime = this.currentTime - this.preTime;
 
-	var speed = Controler.timeToSpeed(this.diffTime);
+	_createClass(Controler, [{
+		key: "shoot",
+		value: function shoot() {
+			if (this.shootable) {
+				if (this.arrow.position.y < S_START) {
+					this.player.shoot(1);
+				} else if (this.arrow.position.y > S_END) {
+					this.player.shoot(2);
+					/**
+      * test score
+      */
+					setTimeout(function () {
+						this.game.ui.plusScore();
+					}.bind(this), 300);
+				} else {
+					this.player.shoot();
+				}
+			}
 
-	// if(this.role==1){
-	this.game.players[0].setSpeed(speed);
-	// }else{
-	// 	this.game.players[1].setSpeed(speed);
-	// }
+			this.shootable = false;
+			this.button.interactive = false;
+		}
+	}, {
+		key: "start",
+		value: function start() {
+			this.shootable = true;
+			this.button.interactive = true;
+			var tween = new TWEEN.Tween(this.arrow.position);
+			tween.to({ y: END_Y }, 1000).onComplete(this.end.bind(this));
 
-	this.preTime = this.currentTime;
-};
+			tween.start();
+		}
+	}, {
+		key: "end",
+		value: function end() {
+			//do something
+			//
+			//
+			//
+			this.shootable = false;
+			this.button.interactive = false;
+			// setTimeout(function(){
+			this.arrow.position.y = START_Y;
+			this.start();
 
-Controler.prototype.addButtons = function () {
-	var _this = this;
-	var button1 = new PIXI.Sprite.fromFrame("button1");
-	button1.interactive = true;
-	button1.position.x = 0;
-	button1.position.y = 790;
-	this.game.scroller.stage.addChild(button1);
+			// }.bind(this),1000);
+		}
+	}, {
+		key: "again",
+		value: function again() {}
+	}, {
+		key: "addArrow",
+		value: function addArrow() {
+			if (this.role == 1) {
+				this.arrow = new PIXI.Sprite.fromFrame("m_arrow");
+			} else {
+				this.arrow = new PIXI.Sprite.fromFrame("s_arrow");
+			}
+			this.arrow.position.x = START_X;
+			this.arrow.position.y = START_Y;
+			this.stage.addChild(this.arrow);
+		}
+	}, {
+		key: "addButtons",
+		value: function addButtons() {
+			var _this = this;
+			if (this.role == 1) {
+				this.button = new PIXI.Sprite.fromFrame("m_btn");
+			} else {
+				this.button = new PIXI.Sprite.fromFrame("s_btn");
+			}
 
-	var button2 = new PIXI.Sprite.fromFrame("button2");
-	button2.interactive = true;
-	button2.position.x = 323;
-	button2.position.y = 790;
-	this.game.scroller.stage.addChild(button2);
+			this.button.interactive = true;
+			this.button.position.x = 216;
+			this.button.position.y = 700;
 
-	button1.on("touchstart", function () {
-		_this.currentTime = new Date().getTime();
-		// this.texture = new PIXI.Texture.fromFrame("button1_active");
-		this.alpha = 0.5;
-		_this.speedUp();
-	});
-	button1.on("touchend", function () {
-		// this.texture = new PIXI.Texture.fromFrame("button1");
-		this.alpha = 1;
-	});
+			this.stage.addChild(this.button);
 
-	button2.on("touchstart", function () {
-		_this.currentTime = new Date().getTime();
-		// this.texture = new PIXI.Texture.fromFrame("button1_active");
-		this.alpha = 0.5;
-		_this.speedUp();
-	});
-	button2.on("touchend", function () {
-		// this.texture = new PIXI.Texture.fromFrame("button1");
-		this.alpha = 1;
-	});
-};
+			this.button.on("touchstart", function () {
+				this.alpha = 0.5;
+				_this.shoot();
+				setTimeout(function () {
+					this.alpha = 1;
+				}.bind(this), 100);
+			});
+			// this.button.on("touchend",function(){
+			// 	this.alpha = 1;
+			// 	// _this.
+			// })
+		}
+	}, {
+		key: "addPlayer",
+		value: function addPlayer() {
+			this.player = new Player(this.role, this.ball);
+			this.stage.addChild(this.player);
+		}
+	}, {
+		key: "addBall",
+		value: function addBall() {
+			this.ball = new Ball();
+			this.stage.addChild(this.ball);
+		}
+	}]);
 
-Controler.prototype.again = function () {
-	this.preTime = 0;
-};
+	return Controler;
+}();
 
 module.exports = Controler;
 
-},{}],3:[function(require,module,exports){
+},{"./Ball.js":2,"./Player.js":7,"tween.js":190}],4:[function(require,module,exports){
 "use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -239,12 +468,13 @@ var MIDDLE_OFFSET = 0.158;
 var FAR_OFFSET = 0.198;
 
 var CrowdFactory = function () {
-	function CrowdFactory(role, stage) {
+	function CrowdFactory(role, stage, camera) {
 		_classCallCheck(this, CrowdFactory);
 
-		// this.role = role
-		this.role = 2;
+		this.role = role;
+		// this.role = 2;
 		this.stage = stage;
+		this.camera = camera;
 		this.init();
 	}
 
@@ -252,6 +482,7 @@ var CrowdFactory = function () {
 		key: "init",
 		value: function init() {
 			this.addFar();
+			this.stage.addChild(this.camera);
 			this.addMiddle();
 			this.addRear();
 		}
@@ -300,10 +531,28 @@ var CrowdFactory = function () {
 		}
 	}, {
 		key: "update",
-		value: function update() {
-			this.rear.tilePosition.x -= REAR_OFFSET;
-			this.middle.tilePosition.x -= MIDDLE_OFFSET;
-			this.far.tilePosition.x -= FAR_OFFSET;
+		value: function update(TWEEN) {
+			var tween = new TWEEN.Tween(this.rear.tilePosition);
+			tween.to({ x: -80 }, 3000);
+			tween.repeat(Infinity);
+			tween.yoyo(true);
+			tween.start();
+
+			var tween2 = new TWEEN.Tween(this.middle.tilePosition);
+			tween2.to({ x: -60 }, 3333);
+			tween2.repeat(Infinity);
+			tween2.yoyo(true);
+			tween2.start();
+
+			var tween3 = new TWEEN.Tween(this.far.tilePosition);
+			tween3.to({ x: -40 }, 5000);
+			tween3.repeat(Infinity);
+			tween3.yoyo(true);
+			tween3.start();
+
+			// this.rear.tilePosition.x -= REAR_OFFSET;
+			// this.middle.tilePosition.x -= MIDDLE_OFFSET;
+			// this.far.tilePosition.x -= FAR_OFFSET;
 		}
 	}]);
 
@@ -312,35 +561,10 @@ var CrowdFactory = function () {
 
 module.exports = CrowdFactory;
 
-},{}],4:[function(require,module,exports){
-"use strict";
-
-function Fires() {
-
-	var textures = [];
-	for (var i = 1; i < 3; i++) {
-		var texture = PIXI.Texture.fromFrame("fires" + i);
-		textures.push(texture);
-	};
-
-	PIXI.extras.MovieClip.call(this, textures);
-	this.animationSpeed = 0.1;
-	this.alpha = 0;
-	// this.position.x = Player.CX+200;
-	// this.position.y = Player.CY+50;
-	this.position.x = 35 + 205;
-	this.position.y = 670 + 55;
-	// this.play();
-}
-
-Fires.prototype = Object.create(PIXI.extras.MovieClip.prototype);
-Fires.constructor = Fires;
-module.exports = Fires;
-
 },{}],5:[function(require,module,exports){
 "use strict";
 
-var Control = require("./Controler.js");
+var Controler = require("./Controler.js");
 var TWEEN = require("tween.js");
 // var $ = window.$;
 function Game(role, type, stage, renderer, ui) {
@@ -373,6 +597,9 @@ Game.prototype.init = function () {
 	// this.ui.addClouds();
 	this.ui.addScore();
 	this.ui.addTime();
+	// this.ui.addCamera();
+	this.ui.takePhoto();
+
 	// this.ui.addFire();
 	// this.ui.addPlayer(this.role);
 
@@ -382,6 +609,7 @@ Game.prototype.init = function () {
 	// 	this.stage.addChild(saucers[i]);
 	// }
 
+	this.controler = new Controler(this, this.role);
 	this.update();
 };
 
@@ -433,21 +661,26 @@ Game.prototype.begin = function (fn) {
 	this.stage.removeChild(this.countDown);
 	this.state = "begin";
 
+	// this.init();
+	this.controler.start();
+
 	//fire when click
 	this.stage.interactive = true;
-	this.stage.on("touchstart", function () {
-		this.ui.player.fire();
-		setTimeout(function () {
-			this.ui.player.hold();
-		}.bind(this), 200);
-	}.bind(this));
+	// this.stage.on("touchstart",function(){
+	// 	this.ui.player.fire();
+	// 	setTimeout(function(){
+	// 		this.ui.player.hold();
+	// 	}.bind(this),200);
+	// }.bind(this))
 
 	// this.saucerPool.init();
 	this.score = 0;
 	//update distance and time
 
 	//update clouds
-	// this.ui.update(TWEEN);
+	this.ui.update(TWEEN);
+
+	// this.ui.crowd.update(TWEEN);
 };
 
 Game.prototype.update = function () {
@@ -455,7 +688,7 @@ Game.prototype.update = function () {
 	//test
 	// update crowd
 
-	this.ui.update();
+	// this.ui.update(TWEEN);
 
 	TWEEN.update();
 
@@ -659,7 +892,7 @@ Game.prototype.getRank = function () {
 
 module.exports = Game;
 
-},{"./Controler.js":2,"tween.js":190}],6:[function(require,module,exports){
+},{"./Controler.js":3,"tween.js":190}],6:[function(require,module,exports){
 "use strict";
 
 var TWEEN = require("tween.js");
@@ -711,13 +944,13 @@ module.exports = Page1;
 },{"tween.js":190}],7:[function(require,module,exports){
 "use strict";
 
-function Player(role, fires) {
+function Player(role, ball) {
 	this.role = role;
-	console.log(this.role);
-	this.fires = fires;
+	this.ball = ball;
 
-	var cdt = this.role == 1 ? "main_player" : "second_player";
-	console.log(cdt);
+	// this.balls =
+
+	var cdt = this.role == 1 ? "m_player" : "s_player";
 	var textures = [];
 	for (var i = 1; i < 3; i++) {
 		var texture = PIXI.Texture.fromFrame(cdt + i);
@@ -725,29 +958,31 @@ function Player(role, fires) {
 	};
 
 	PIXI.extras.MovieClip.call(this, textures);
-	this.animationSpeed = 0.2;
-	// this.loop = false;
+	this.animationSpeed = 0.08;
+
 	this.position.x = Player.CX;
 	this.position.y = Player.CY;
-	// this.play();
-	//
+	this.loop = false;
 }
-Player.CX = 35;
-Player.CY = 670;
+Player.CX = 180;
+Player.CY = 500;
 
 Player.constructor = Player;
 Player.prototype = Object.create(PIXI.extras.MovieClip.prototype);
 
-Player.prototype.fire = function () {
-	this.play();
-	this.fires.alpha = 1;
-	this.fires.play();
+Player.prototype.shoot = function () {
+	this.gotoAndPlay(0);
+
+	this.ball.shoot();
+
+	setTimeout(function () {
+		this.hold();
+	}.bind(this), 300);
 };
 
 Player.prototype.hold = function () {
-	this.stop();
-	this.fires.alpha = 0;
-	this.fires.stop();
+	this.gotoAndStop(1);
+	// this.ball.stop();
 };
 module.exports = Player;
 
@@ -841,9 +1076,9 @@ module.exports = Interact;
 },{"socket.io-client":178}],9:[function(require,module,exports){
 "use strict";
 
-var TWEEN;
+var TWEEN = require("tween.js");
 var Player = require("./Player.js");
-var Fires = require("./Fires.js");
+// var Fires = require("./Fires.js")
 var WIDTH = window.SCREEN_WIDTH;
 var HEIGHT = window.SCREEN_HEIGHT;
 var FLOORY = 620;
@@ -863,49 +1098,23 @@ var STYLE_X = {
 	font: 'bold italic 40px Arial'
 };
 
-function UI(stage, role) {
+function UI(stage, role, tween) {
 	this.stage = stage;
 
 	// this.addBG();
 	// this.addScore();	
 	// this.addTime();
 
-	this.score = "00";
+	this.score = 0;
 	this.time = 15;
 	this.role = role;
+
+	// TWEEN = tween;
 }
 
 PIXI.SCALE_MODES = "LINEAR";
 
-UI.prototype.addClouds = function () {
-	this.clouds = new PIXI.Container();
-	var cloud1 = new PIXI.Sprite.fromFrame("cloud");
-	cloud1.position.x = 30;
-	cloud1.position.y = 50;
-	this.clouds.addChild(cloud1);
-
-	var cloud2 = new PIXI.Sprite.fromFrame("cloud");
-	cloud2.position.x = 400;
-	cloud2.position.y = 230;
-	this.clouds.addChild(cloud2);
-
-	var cloud3 = new PIXI.Sprite.fromFrame("cloud");
-	cloud3.position.x = 760;
-	cloud3.position.y = 60;
-	this.clouds.addChild(cloud3);
-
-	this.clouds.position.x = 0;
-
-	this.stage.addChild(this.clouds);
-};
-
-UI.prototype.updateClouds = function () {
-	var tween = new TWEEN.Tween(this.clouds.position);
-	tween.to({ x: -400 }, 25000);
-	tween.repeat(Infinity);
-	tween.yoyo(true);
-	tween.start();
-};
+UI.CAMERA_MAX_Y = 300;
 
 UI.prototype.addBG = function () {
 	if (this.role == 1) {
@@ -926,10 +1135,10 @@ UI.prototype.addPlayer = function () {
 	this.stage.addChild(this.player);
 };
 
-UI.prototype.addFire = function () {
-	this.fires = new Fires();
-	this.stage.addChild(this.fires);
-};
+// UI.prototype.addFire = function(){
+// 	this.fires = new Fires();
+// 	this.stage.addChild(this.fires);
+// }
 
 UI.prototype.addScore = function () {
 
@@ -943,8 +1152,14 @@ UI.prototype.addScore = function () {
 	this.stage.addChild(this.scoreText);
 };
 
+UI.prototype.plusScore = function () {
+	this.setScore(++this.score);
+};
+
 UI.prototype.addCrowd = function () {
-	this.crowd = new CrowdFactory(this.role, this.stage);
+	this.addCamera();
+	console.log(this.role);
+	this.crowd = new CrowdFactory(this.role, this.stage, this.camera);
 };
 
 UI.prototype.addTime = function () {
@@ -992,9 +1207,9 @@ UI.prototype.over = function () {
 UI.prototype.update = function (tween) {
 	this.state = "update";
 	// TWEEN = tween;
-	// this.updateTime();
+	this.updateTime();
 	// this.updateClouds();
-	this.crowd.update();
+	this.crowd.update(tween);
 };
 
 UI.prototype.again = function () {
@@ -1002,9 +1217,67 @@ UI.prototype.again = function () {
 	this.scoreText = this.score = "000";
 };
 
+UI.prototype.addCamera = function () {
+	this.camera = new PIXI.Sprite.fromFrame("camera");
+	this.camera.position.y = UI.CAMERA_MAX_Y;
+	this.picturing = new PIXI.Sprite.fromFrame("caa");
+	this.picturing.position.x = 80;
+	this.picturing.position.y = -20;
+	this.picturing.alpha = 0;
+	// this.picturing.scale = 0.1;
+	this.camera.addChild(this.picturing);
+	// this.stage.addChild(this.camera);
+};
+
+UI.prototype.takePhoto = function () {
+	var tween = new TWEEN.Tween(this.camera.position);
+	var coordinate = generatePicturingPosition();
+	this.camera.position.x = coordinate.x;
+	tween.to({ y: coordinate.y }, 1000).onComplete(this.caa.bind(this));
+
+	tween.start();
+};
+
+UI.prototype.caa = function () {
+	this.caaTween = new TWEEN.Tween(this.picturing);
+	this.caaTween.to({ alpha: 1 }, 300).onComplete(this.hideCamera.bind(this)).start();
+};
+
+UI.prototype.hideCamera = function () {
+	this.picturing.alpha = 0;
+	// this.picturing.scale = 0.1;
+	var tween = new TWEEN.Tween(this.camera.position);
+	tween.to({ y: UI.CAMERA_MAX_Y }, 1000).onComplete(function () {
+		this.takePhoto();
+	}.bind(this), 2000).delay(1000);
+	tween.start();
+};
+
+UI.prototype.stopAnimation = function () {
+	webkitCancelAnimationFrame(this.timer);
+	this.timer = null;
+};
+
+function generatePicturingPosition() {
+	var minX = 0;
+	var maxX = 600;
+	var minY = 120;
+	var maxY = 250;
+
+	var x = Math.floor(Math.random() * maxX);
+	var y = Math.max(Math.floor(Math.random() * maxY), minY);
+
+	// var y = Math.random()*maxY;
+	var coordinate = {
+		"x": x,
+		"y": y
+	};
+	return coordinate;
+}
+
 module.exports = UI;
 
-},{"./CrowdFactory.js":3,"./Fires.js":4,"./Player.js":7}],10:[function(require,module,exports){
+},{"./CrowdFactory.js":4,"./Player.js":7,"tween.js":190}],10:[function(require,module,exports){
 module.exports = after
 
 function after(count, callback, err_cb) {
