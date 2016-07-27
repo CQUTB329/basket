@@ -138,10 +138,11 @@ body{
     <div class="title">单人玩家</div>
     
     <div class="doc_box">
-      <div ><span style="color:#ffd92c">点击飞盘</span>,</div>
-      <div >以最快的速度，</div>
-      <div >最准的枪法，</div>
-      <div >射中更多的飞盘~~</div>
+      <div >画面右侧箭头指向红色区域时,</div>
+      <div >为最佳投球时机，</div>
+      <div >点击<span style="color:#f65151"><投篮></span>按钮，</div>
+      <div >投出手中篮球，</div>
+      <div>fighting~~</div>
     </div>
   </div>
 
@@ -155,11 +156,12 @@ body{
     <div class="doc_box">
       <div class="p1">邀请好友微信扫描二维码，</div>
       <div>进入双人玩家模式；</div>
-      <div class="p2"><span style="color:#ffd92c">点击飞盘</span>,</div>
-      <div >以最快的速度，最准的枪法，</div>
-    
-      <div >射中更多的飞盘~~</div>
-       <div >快和你的小伙伴一比高下吧~~</div>
+
+      <div class="p2">画面右侧箭头指向红色区域时,</div>
+      <div >为最佳投球时机，</div>
+      <div >点击<span style="color:#f65151"><投篮></span>按钮，</div>
+      <div >投出手中篮球，</div>
+      <div>fighting~~</div>
     </div>
 
     <div class="ewm_wrapper">
@@ -182,7 +184,7 @@ body{
   <div id="result">
     <div style="display:none">0123456789.你在穿杨射柳的比赛中击中XX飞碟，枪法堪比王义夫、许海峰、杜丽、庞伟，人名随机。枪法堪比黄忠、许三多、后羿、小李广花荣，人名随机枪法堪比特种兵、雪豹突击队，人名随机枪法还需多加练习……这枪法简直没谁了……我</div>
     <div class="wrapper">
-      <div class="shooted">射击比赛您射中：</div>
+      <div class="shooted">投篮比赛您投中：</div>
       <div id="main_num">36枚</div>
 
       <div class="second_s">好友成绩：<span id="second_num">36枚</span></div>
@@ -239,7 +241,7 @@ body{
       window.game.readyToPlay();
   },false);
 
-  document.querySelector("#specification2 .shoot").addEventListener("click",function(){
+  document.querySelector("#specification2 .close").addEventListener("click",function(){
       document.querySelector("#specification2").style.display = "none";
   },false);
 

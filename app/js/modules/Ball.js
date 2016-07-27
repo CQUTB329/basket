@@ -8,8 +8,8 @@ function Ball(){
 
 	PIXI.extras.MovieClip.call(this,textures);
 	this.animationSpeed = 0.1;
-	this.position.x = 242;
-	this.position.y = 493;
+	this.position.x = START_X;
+	this.position.y = START_Y;
 }
 var START_X = 242;
 var START_Y = 483;
@@ -28,9 +28,9 @@ Ball.prototype.shoot = function(direction){
 	this.play();
 	//shoot has completed
 	this.straight(direction);
-	setTimeout(function(){
-		this.reBack();
-	}.bind(this),1000);
+	// setTimeout(function(){
+	// 	this.reBack();
+	// }.bind(this),1000);
 		// tween.easing(tenStepEasing);
 }
 
@@ -123,7 +123,6 @@ Ball.prototype.goDown = function(){
 	}.bind(this));
 	down.start();
 }
-
 
 Ball.prototype.goLeft = function(){
 	var downLeft = new TWEEN.Tween(this.position)

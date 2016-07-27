@@ -1,7 +1,9 @@
+var Ball = require("./Ball.js")
+var BALL_NUM = 15;
 
-function Player(role,ball){
+function Player(role,stage){
 	this.role = role;
-	this.ball = ball;
+	this.stage = stage;
 
 	// this.balls = 
 
@@ -20,6 +22,14 @@ function Player(role,ball){
 	this.position.y = Player.CY;
 	this.loop = false;
 
+
+
+
+	// init balls
+	
+	this.balls = [];
+	this.initBalls();
+
 	
 }
 Player.CX = 180;
@@ -30,12 +40,23 @@ Player.prototype = Object.create(PIXI.extras.MovieClip.prototype);
 
 
 
+Player.prototype.initBalls = function(){
+
+	for (var i = 0;i<BALL_NUM;i++){
+		var ball = new Ball();
+		ball.alpha = 0;
+		this.balls.push(ball);
+		this.stage.addChild(ball);
+	}
 
 
-Player.prototype.shoot = function(){
+}
+
+
+Player.prototype.shoot = function(direction){
 	this.gotoAndPlay(0);
 
-	this.ball.shoot();
+	this.ball.shoot(direction);
 
 	setTimeout(function(){
 		this.hold();
@@ -43,9 +64,26 @@ Player.prototype.shoot = function(){
 
 }
 
-Player.prototype.hold = function(){
-	this.gotoAndStop(1);
-	// this.ball.stop();
 
+
+/**
+ * shoot complete
+ * pick up a new ball
+ * @return {[type]} [description]
+ */
+Player.prototype.hold = function(){
+	this.gotoAndStop(0);
+	// this.ball.stop();
+	// 
+	// 
+	this.pickUp();
+
+}
+
+
+Player.prototype.pickUp = function(){
+	this.ball = this.balls.pop();
+	this.ball.alpha = 1;
+	// this.stage.addChild(this.ball);
 }
 module.exports = Player;

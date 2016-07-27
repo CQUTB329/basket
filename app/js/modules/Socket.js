@@ -6,9 +6,9 @@ var counter = 0;
 var isGenerated = false;
 // ws.a.sohu.com
 var Interact = window.Interact = {
-    host: 'ws://10.2.156.125:',
+    host: 'ws://10.2.153.72:',
     port: 3000,
-    url: 'http://10.2.156.125',
+    url: 'http://10.2.153.72',
     // 连接房间
     registerRoom: function (rid) {
         var _this = this;
@@ -23,9 +23,9 @@ var Interact = window.Interact = {
     generateQR:function(ele){
         var _this = this;
         if(!isGenerated){
-            if(w.location.pathname != '/shooting'){
+            if(w.location.pathname != '/basket'){
                 var qrcode = new QRCode(ele, {
-                    text: _this.url + ":" + _this.port + "/shooting?roomid=" + _this.roomID,
+                    text: _this.url + ":" + _this.port + "/basket?roomid=" + _this.roomID,
                     width: 257,
                     height: 257,
                     colorDark : "#000000",

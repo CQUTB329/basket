@@ -2,6 +2,7 @@ var START_X = 530;
 var START_Y = 252;
 var ARROW_L = 43;
 var TIME_L = 557;
+var ARROW_TIME = 1000;
 var END_Y = START_Y+TIME_L-ARROW_L;
 
 
@@ -23,7 +24,12 @@ class Controler{
 	
 		this.addArrow();
 
-		this.addBall();
+		// this.addBall();
+	
+		// this.player.
+
+		this.player = new Player(this.role,this.stage);
+		this.player.pickUp();
 		this.addPlayer();
 		this.addButtons();
 	}
@@ -33,18 +39,21 @@ class Controler{
 
 	shoot(){
 		if(this.shootable){
+			console.log(this.arrow.position.y);
 			if(this.arrow.position.y<S_START){
 				this.player.shoot(1);
 			}else if(this.arrow.position.y>S_END){
 				this.player.shoot(2)
-				/**
+			
+			}else{
+				this.player.shoot();
+
+					/**
 				 * test score
 				 */
 				setTimeout(function(){
 					this.game.ui.plusScore();
 				}.bind(this),300);
-			}else{
-				this.player.shoot();
 
 			}
 		
@@ -58,13 +67,17 @@ class Controler{
 		this.shootable = true;
 		this.button.interactive = true;
 		var tween = new TWEEN.Tween(this.arrow.position);
-		tween.to({y:END_Y},1000)
+		tween.to({y:END_Y},ARROW_TIME)
 		.onComplete(this.end.bind(this))
 		
 		tween.start();
 
 	}
 
+	/**
+	 * one chance of shoot 
+	 * @return {[type]} [description]
+	 */
 	end(){
 		//do something
 		//
@@ -82,9 +95,6 @@ class Controler{
 
 	}
 
-	again(){
-
-	}
 
 	addArrow(){
 		if(this.role==1){
@@ -129,10 +139,13 @@ class Controler{
 	}
 
 	addPlayer(){
-		this.player = new Player(this.role,this.ball);
+		
 		this.stage.addChild(this.player);
 	}
 
+	/**
+	 * deprected
+	 */
 	addBall(){
 		this.ball = new Ball();
 		this.stage.addChild(this.ball);

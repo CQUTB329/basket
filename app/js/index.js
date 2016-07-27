@@ -3,6 +3,8 @@ var PIXI = require('pixi.js');
 var Interact = require("./modules/Socket.js");
 var Page1 = require("./modules/Page1.js")
 var all  = document.getElementById("gameWrapper");
+
+var Cookie = require('./Cookie.js');
 var WIDTH = window.SCREEN_WIDTH = 640;
 var HEIGHT = window.SCREEN_HEIGHT =1136;
 
@@ -57,15 +59,18 @@ Main.prototype.spriteSheetLoaded = function(){
  * @return   {Boolean}                [description]
  */
 Main.prototype.isSecond = function(){
-  var arg = window.location.search.slice(1);
-  var arr = arg.split("&");
-  var obj ={};
-  for(let i in arr){
-      let temp = arr[i].split("=");
-      obj[temp[0]] = temp[1]
-  }
+  // var arg = window.location.search.slice(1);
+  // var arr = arg.split("&");
+  // var obj ={};
+  // for(let i in arr){
+  //     let temp = arr[i].split("=");
+  //     obj[temp[0]] = temp[1]
+  // }
 
-  var roomid = obj.roomid;
+  // var roomid = obj.roomid;
+
+  var roomid = Cookie.get("roomid");
+  console.log(roomid)
   if(roomid){
     this.role = 2;
     this.type = 2;

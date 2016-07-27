@@ -59,13 +59,13 @@ body,html,#gameWrapper,.main,.wrap{
 #main_num{
   font-size: 60px;
   .abs_text(260px);
-  color:#40455d;
+  color:#fed700;
   font-family: FZLTCH;
 }
 
 .doc{
   .abs_text(345px);
-  color:#40455d;
+  color:#fff;
   font-size: 30px;
   font-family: FZLTCH;
   max-width: 80%;
@@ -97,12 +97,11 @@ body,html,#gameWrapper,.main,.wrap{
   background: rgba(0, 0, 0, 0.5);
 
   .shareFlag{
-    width: 54px;
-    height: 376px;
+
     position: absolute;
     right: 50px;
     top:20px;
-    background: url(../img/share.png) no-repeat;
+    .sprite(@share);
   }
 }
 
@@ -116,7 +115,7 @@ body,html,#gameWrapper,.main,.wrap{
 .detail{
   position: absolute;
   top:180px;
-  color:#ed7620;
+  color:#ee4949;
   font-size: 60px;
   text-align: center;
   font-weight: bold;
@@ -127,7 +126,7 @@ body,html,#gameWrapper,.main,.wrap{
 .title{
   position: absolute;
   top:257px;
-  color:rgb(254, 215, 0);
+  color:#fed700;
   font-size: 40px;
   text-align: center;
   font-weight: bold;
@@ -135,13 +134,16 @@ body,html,#gameWrapper,.main,.wrap{
 }
 
 .run{
-  width: 183px;
-  height: 101px;
+
   top: 418px;
   position: absolute;
   left: 0;right: 0;
   margin: auto;
-  background:url(../img/run.png) no-repeat;
+  // background:url(../img/run.png) no-repeat;
+  //   width: 183px;
+  // height: 101px;
+
+  .sprite(@shoot);
 
 }
 
@@ -169,13 +171,15 @@ body,html,#gameWrapper,.main,.wrap{
 }
 
 .close{
- background: url(../img/close.png) no-repeat;
+ // background: url(../img/close.png) no-repeat;
  
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 46px;
-  height: 45px;
+ //  width: 46px;
+ //  height: 45px;
+  // .abs(20px,20px);
+  .sprite(@close);
 }
 
 .shoot{
@@ -186,14 +190,14 @@ body,html,#gameWrapper,.main,.wrap{
 .agian{
   position: absolute;
   left: 50px;
-  top: 650-60px;
+  top: 650-60+60px;
   width: 295-50px;
   height: 750-650px;
 }
 
 .basketbal{
   left: 50px;
-  top:770-60px;
+  top:770-60+60px;
   width: 295-50px;
   height: 750-650px;
   position: absolute;
@@ -202,7 +206,7 @@ body,html,#gameWrapper,.main,.wrap{
 .share{
   position: absolute;
   left: 340px;
-  top: 650-60px;
+  top: 650-60+60px;
   width: 295-50px;
   height: 750-650px;
 }
@@ -210,7 +214,7 @@ body,html,#gameWrapper,.main,.wrap{
 .shooted{
   .abs_text(215px);
   font-family: FZLTCH;
-  color:#ee842c;
+  color:#ffacac;
   font-size: 30px;
 }
 
@@ -221,14 +225,14 @@ body,html,#gameWrapper,.main,.wrap{
   font-size: 30px;
   .abs_text(340px);
   #second_num{
-    color:#40455d;
+    color:#fed700;
     padding-left: 20px;
   }
 }
 
 .shooting{
   left: 340px;
-  top:770-60px;
+  top:770px;
   width: 295-50px;
   height: 750-650px;
   position: absolute;
@@ -310,11 +314,13 @@ body,html,#gameWrapper,.main,.wrap{
   background: rgba(0, 0, 0, 0.7);
 
   .overbg{
-    background: url(../img/players.png) no-repeat;
-    height:79px;width:519px;background-position:0 -139px;
+    background: url(../img/GAME-OVER.png) no-repeat;
+    height:79px;width:519px;
     .abs(50px,460px);
   }
 }
+
+
 
 
 
@@ -357,6 +363,7 @@ body,html,#gameWrapper,.main,.wrap{
   }
   .abs(20px,460px)
 }
+
 
 
 

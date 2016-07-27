@@ -87,7 +87,7 @@ html,
   width: 100%;
   text-align: center;
   top: 260px;
-  color: #40455d;
+  color: #fed700;
   font-family: FZLTCH;
 }
 .doc {
@@ -98,7 +98,7 @@ html,
   width: 100%;
   text-align: center;
   top: 345px;
-  color: #40455d;
+  color: #fff;
   font-size: 30px;
   font-family: FZLTCH;
   max-width: 80%;
@@ -134,17 +134,18 @@ html,
   background: rgba(0, 0, 0, 0.5);
 }
 .shareCover .shareFlag {
-  width: 54px;
-  height: 376px;
   position: absolute;
   right: 50px;
   top: 20px;
-  background: url(../img/share.png) no-repeat;
+  background-image: url(../img/sprite.png);
+  background-position: -1280px 0px;
+  width: 55px;
+  height: 375px;
 }
 .detail {
   position: absolute;
   top: 180px;
-  color: #ed7620;
+  color: #ee4949;
   font-size: 60px;
   text-align: center;
   font-weight: bold;
@@ -161,14 +162,15 @@ html,
   width: 100%;
 }
 .run {
-  width: 183px;
-  height: 101px;
   top: 418px;
   position: absolute;
   left: 0;
   right: 0;
   margin: auto;
-  background: url(../img/run.png) no-repeat;
+  background-image: url(../img/sprite.png);
+  background-position: -1022px -522px;
+  width: 183px;
+  height: 101px;
 }
 .doc_box {
   text-align: center;
@@ -191,10 +193,11 @@ html,
   background: rgba(0, 0, 0, 0.75);
 }
 .close {
-  background: url(../img/close.png) no-repeat;
   position: absolute;
   top: 20px;
   right: 20px;
+  background-image: url(../img/sprite.png);
+  background-position: -1335px -239px;
   width: 46px;
   height: 45px;
 }
@@ -212,13 +215,13 @@ html,
 .agian {
   position: absolute;
   left: 50px;
-  top: 590px;
+  top: 650px;
   width: 245px;
   height: 100px;
 }
 .basketbal {
   left: 50px;
-  top: 710px;
+  top: 770px;
   width: 245px;
   height: 100px;
   position: absolute;
@@ -226,7 +229,7 @@ html,
 .share {
   position: absolute;
   left: 340px;
-  top: 590px;
+  top: 650px;
   width: 245px;
   height: 100px;
 }
@@ -239,7 +242,7 @@ html,
   text-align: center;
   top: 215px;
   font-family: FZLTCH;
-  color: #ee842c;
+  color: #ffacac;
   font-size: 30px;
 }
 .second_s {
@@ -256,12 +259,12 @@ html,
   top: 340px;
 }
 .second_s #second_num {
-  color: #40455d;
+  color: #fed700;
   padding-left: 20px;
 }
 .shooting {
   left: 340px;
-  top: 710px;
+  top: 770px;
   width: 245px;
   height: 100px;
   position: absolute;
@@ -342,10 +345,9 @@ html,
   background: rgba(0, 0, 0, 0.7);
 }
 .gameover .overbg {
-  background: url(../img/players.png) no-repeat;
+  background: url(../img/GAME-OVER.png) no-repeat;
   height: 79px;
   width: 519px;
-  background-position: 0 -139px;
   position: absolute;
   left: 50px;
   top: 460px;

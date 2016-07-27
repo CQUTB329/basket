@@ -36,7 +36,7 @@ Game.prototype.init = function(){
 	// this.ui.addCamera();
 	this.ui.takePhoto();
 
-	
+
 	// this.ui.addFire();
 	// this.ui.addPlayer(this.role);
 	
@@ -91,6 +91,10 @@ Game.prototype.ready = function(again){
 	},3000);
 }
 
+/**
+ * 双人作战 点击开投
+ * @return {[type]} [description]
+ */
 Game.prototype.readyToPlay = function(){
 	var _this = this;
 	console.log(this.role);
@@ -231,6 +235,7 @@ Game.prototype.over = function(){
 
 	if(this.type == 2){
 	 	this.renderer.render(this.stage);
+	 	console.log(this.ui.getScore());
 
 	 	window.Interact.socket.emit("completeTime",{room_id:window.Interact.roomID,role:this.role,time:this.ui.getScore()});
 	 	window.Interact.socket.on("completed",function(data){
@@ -247,10 +252,13 @@ Game.prototype.over = function(){
 	 	})
 	}else{
 
-	 	this.stage.removeChildren();
+		setTimeout(function(){
+			this.stage.removeChildren();
+
+		}.bind(this),1000);
+	 	this.showResult();
 			
 
-		this.showResult();
 	}
 
 }
@@ -273,7 +281,7 @@ Game.prototype.showResult = function(){
 
 	//comment
 	var comment = "";
-	var totalNum = this.saucerPool.totalNum;
+	var totalNum = 15;
 	// if(this.type == 1){
 
 		if(main_player_score>totalNum*0.9){
