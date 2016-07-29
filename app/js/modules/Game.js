@@ -272,33 +272,12 @@ Game.prototype.showResult = function(){
 
 	var main_player_score = this.ui.score;
 
-	var level1 = ["王义夫",'许海峰','杜丽','庞伟'];
-	var level2 = ['黄忠','许三多','后羿','小李广花荣'];
-	var level3 = ['特种兵','雪豹突击队'];
-
 
 	var otherScore = this.otherScore;
 
 	//comment
-	var comment = "";
+	var comment = "砍下"+main_player_score*3+"分";
 	var totalNum = 15;
-	// if(this.type == 1){
-
-		if(main_player_score>totalNum*0.9){
-			comment = "你在穿杨射柳的比赛中击中XX飞碟，枪法堪比"+this.getPerson(level1);
-		}else if(main_player_score>=totalNum*0.7&&main_player_score<totalNum*0.9){
-			comment = "你在穿杨射柳的比赛中击中XX飞碟，枪法堪比"+this.getPerson(level2);
-		}else if(main_player_score>=totalNum*0.6&&main_player_score<totalNum*0.7){
-			comment = "你在穿杨射柳的比赛中击中XX飞碟，枪法堪比"+this.getPerson(level3);
-		}else if(main_player_score>=totalNum*0.3&&main_player_score<totalNum*0.6){
-			comment = "你在穿杨射柳的比赛中击中XX飞碟，枪法还需多加练习⋯⋯"
-		}
-		else{
-			comment = "你在穿杨射柳的比赛中击中XX飞碟，这枪法简直没谁了⋯⋯"
-		}
-
-
-	// }
 
 	if(this.type==2) {
 		document.querySelector(".second_s").style.display = "block";
@@ -309,8 +288,11 @@ Game.prototype.showResult = function(){
 	document.querySelector(".doc").innerHTML = comment;
 	document.querySelector("#main_num").innerHTML = main_player_score+"枚";
 
+	/**
+	 * set share content
+	 */
 
-
+	window.shareDetail.content = "我15秒三分球15投"+main_player_score+"中，砍下"+main_player_score*3+"分";
 	setTimeout(function(){
 		document.querySelector(".gameover").style.display = "none";
 		document.getElementById("result").style.display = "block";

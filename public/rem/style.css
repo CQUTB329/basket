@@ -11,6 +11,7 @@ The large array-like variables contain all information about a single icon
 At the bottom of this section, we provide information about the spritesheet itself
 @spritesheet: width height image @spritesheet-sprites;
 */
+
 /*
 The provided classes are intended to be used with the array-like variables
 
@@ -36,6 +37,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 // HTML
 <i class="icon icon-home"></i>
 */
+
 /*
 The `.sprites` mixin generates identical output to the CSS template
   but can be overridden inside of LESS
@@ -45,59 +47,7 @@ This must be run when you have at least 2 sprites.
 
 .sprites(@spritesheet-sprites);
 */
-.loading {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: #ee4949;
-  z-index: 999;
-}
-.loading .loading_player {
-  width: 112px;
-  height: 206px;
-  position: absolute;
-  left: 264px;
-  top: 373px;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
-  background: url(../img/loading.png) no-repeat;
-  -webkit-animation: loading 0.6s steps(6) infinite;
-          animation: loading 0.6s steps(6) infinite;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  z-index: 9999;
-}
-@-webkit-keyframes loading {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: -672px 0;
-  }
-}
-@keyframes loading {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: -672px 0;
-  }
-}
-.loading .progress-num {
-  color: #fff;
-  font-family: 微软雅黑;
-  font-weight: bold;
-  font-size: 50px;
-  position: absolute;
-  width: 100%;
-  left: 0;
-  right: 0;
-  margin: auto;
-  top: 600px;
-  text-align: center;
-}
+
 body,
 html,
 #gameWrapper,
@@ -106,75 +56,23 @@ html,
   width: 100%;
   height: 100%;
 }
+
 * {
   margin: 0;
   padding: 0;
 }
-.breath {
-  -webkit-animation-name: breath;
-          animation-name: breath;
-}
-@-webkit-keyframes breath {
-  0% {
-    opacity: 1;
-  }
-  40% {
-    opacity: 0.5;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes breath {
-  0% {
-    opacity: 1;
-  }
-  40% {
-    opacity: 0.5;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-.slideInUpRight {
-  -webkit-animation-name: slideInUpRight;
-          animation-name: slideInUpRight;
-}
-@-webkit-keyframes slideInUpRight {
-  from {
-    -webkit-transform: translate3d(3000px, 3000px, 0);
-            transform: translate3d(3000px, 3000px, 0);
-  }
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes slideInUpRight {
-  from {
-    -webkit-transform: translate3d(3000px, 3000px, 0);
-            transform: translate3d(3000px, 3000px, 0);
-  }
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-}
+
 #result {
   width: 100%;
   height: 100%;
   position: absolute;
   left: 0;
   top: 0;
+  background: #ffd45a;
   z-index: 10;
   display: none;
 }
+
 #result .wrapper {
   width: 100%;
   height: 100%;
@@ -183,21 +81,24 @@ html,
   top: 0;
   background: url(../img/resultbg.png) no-repeat;
 }
+
 .gameWrapper {
   display: none;
 }
+
 #main_num {
-  font-size: 60px;
+  font-size: 6rem;
   left: 0;
   right: 0;
   margin: auto;
   position: absolute;
   width: 100%;
   text-align: center;
-  top: 260px;
+  top: 26rem;
   color: #fed700;
   font-family: FZLTCH;
 }
+
 .doc {
   left: 0;
   right: 0;
@@ -205,12 +106,13 @@ html,
   position: absolute;
   width: 100%;
   text-align: center;
-  top: 345px;
+  top: 34.5rem;
   color: #fff;
-  font-size: 30px;
+  font-size: 3rem;
   font-family: FZLTCH;
   max-width: 80%;
 }
+
 .doc.double_p {
   left: 0;
   right: 0;
@@ -218,8 +120,9 @@ html,
   position: absolute;
   width: 100%;
   text-align: center;
-  top: 405px;
+  top: 40.5rem;
 }
+
 .page1 {
   width: 100%;
   height: 100%;
@@ -227,12 +130,12 @@ html,
   left: 0;
   top: 0;
   background: url(../img/page1.jpg) no-repeat;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
 }
+
 /**
 * share
 */
+
 .shareCover {
   position: absolute;
   left: 0;
@@ -241,69 +144,62 @@ html,
   top: 0;
   z-index: 100;
   display: none;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
 }
+
 .shareCover .shareFlag {
   position: absolute;
-  right: 50px;
-  top: 20px;
+  right: 5rem;
+  top: 2rem;
   background-image: url(../img/sprite.png);
-  background-position: -1280px 0px;
-  width: 55px;
-  height: 375px;
+  background-position: -128rem 0;
+  width: 5.5rem;
+  height: 37.5rem;
 }
-.shareCover .share_ewm {
-  position: absolute;
-  left: 0;
-  top: 450px;
-  right: 0;
-  margin: auto;
-  width: 280px;
-  height: 328px;
-}
-.shareCover .share_ewm img {
-  width: 100%;
-}
+
 .detail {
   position: absolute;
-  top: 180px;
+  top: 18rem;
   color: #ee4949;
-  font-size: 60px;
+  font-size: 6rem;
   text-align: center;
   font-weight: bold;
   width: 100%;
   font-family: FZLTCH;
 }
+
 .title {
   position: absolute;
-  top: 257px;
+  top: 25.7rem;
   color: #fed700;
-  font-size: 40px;
+  font-size: 4rem;
   text-align: center;
   font-weight: bold;
   width: 100%;
 }
+
 .run {
-  top: 418px;
+  top: 41.8rem;
   position: absolute;
   left: 0;
   right: 0;
   margin: auto;
   background-image: url(../img/sprite.png);
-  background-position: -1022px -522px;
-  width: 183px;
-  height: 101px;
+  background-position: -102.2rem -52.2rem;
+  width: 18.3rem;
+  height: 10.1rem;
 }
+
 .doc_box {
   text-align: center;
   position: absolute;
-  top: 500px;
-  font-size: 36px;
+  top: 50rem;
+  font-size: 3.6rem;
   color: #fff;
-  top: 378px;
+  top: 37.8rem;
   width: 100%;
-  line-height: 41px;
 }
+
 #specification1 {
   display: none;
   font-family: FZLTH;
@@ -315,47 +211,53 @@ html,
   z-index: 9;
   background: rgba(0, 0, 0, 0.75);
 }
+
 .close {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 2rem;
+  right: 2rem;
   background-image: url(../img/sprite.png);
-  background-position: -1335px -239px;
-  width: 46px;
-  height: 45px;
+  background-position: -133.5rem -23.9rem;
+  width: 4.6rem;
+  height: 4.5rem;
 }
+
 .shoot {
   background-image: url(../img/sprite.png);
-  background-position: -1022px -522px;
-  width: 183px;
-  height: 101px;
+  background-position: -102.2rem -52.2rem;
+  width: 18.3rem;
+  height: 10.1rem;
   position: absolute;
   left: 0;
-  top: 600px;
+  top: 60rem;
   right: 0;
   margin: auto;
 }
+
 .agian {
   position: absolute;
-  left: 50px;
-  top: 650px;
-  width: 245px;
-  height: 100px;
+  left: 5rem;
+  top: 65rem;
+  width: 24.5rem;
+  height: 10rem;
 }
-.running {
-  left: 50px;
-  top: 770px;
-  width: 245px;
-  height: 100px;
+
+.basketbal {
+  left: 5rem;
+  top: 77rem;
+  width: 24.5rem;
+  height: 10rem;
   position: absolute;
 }
+
 .share {
   position: absolute;
-  left: 340px;
-  top: 650px;
-  width: 245px;
-  height: 100px;
+  left: 34rem;
+  top: 65rem;
+  width: 24.5rem;
+  height: 10rem;
 }
+
 .shooted {
   left: 0;
   right: 0;
@@ -363,38 +265,43 @@ html,
   position: absolute;
   width: 100%;
   text-align: center;
-  top: 215px;
+  top: 21.5rem;
   font-family: FZLTCH;
   color: #ffacac;
-  font-size: 30px;
+  font-size: 3rem;
 }
+
 .second_s {
   display: none;
   font-family: FZLTCH;
   color: #fed700;
-  font-size: 30px;
+  font-size: 3rem;
   left: 0;
   right: 0;
   margin: auto;
   position: absolute;
   width: 100%;
   text-align: center;
-  top: 340px;
+  top: 34rem;
 }
+
 .second_s #second_num {
   color: #fed700;
-  padding-left: 20px;
+  padding-left: 2rem;
 }
+
 .shooting {
-  left: 340px;
-  top: 770px;
-  width: 245px;
-  height: 100px;
+  left: 34rem;
+  top: 77rem;
+  width: 24.5rem;
+  height: 10rem;
   position: absolute;
 }
+
 .p2 {
-  margin-top: 50px;
+  margin-top: 5rem;
 }
+
 #specification2 {
   display: none;
   font-family: FZLTH;
@@ -406,47 +313,55 @@ html,
   z-index: 9;
   background: rgba(0, 0, 0, 0.75);
 }
+
 #specification2 .detail {
-  top: 80px;
+  top: 8rem;
 }
+
 #specification2 .title {
-  top: 158px;
+  top: 15.8rem;
 }
+
 #specification2 .doc_box {
-  top: 235px;
+  top: 23.5rem;
 }
+
 .ewm_box {
-  width: 268px;
-  height: 272px;
-  margin-bottom: 10px;
-  padding-top: 5px;
-  padding-left: 7px;
+  width: 26.8rem;
+  height: 27.2rem;
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-left: 0.7rem;
   background: #fff;
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 .ewm_wrapper {
   position: absolute;
-  left: 171px;
-  top: 634px;
-  width: 268px;
-  height: 322px;
+  left: 17.1rem;
+  top: 63.4rem;
+  width: 26.8rem;
+  height: 32.2rem;
 }
+
 .scanme {
   color: #fff;
-  font-size: 30px;
+  font-size: 3rem;
   text-align: center;
 }
+
 .success_doc {
   font-family: FZLTH;
-  font-size: 36px;
+  font-size: 3.6rem;
   color: #fff;
   text-align: center;
   position: absolute;
-  top: 515px;
+  top: 51.5rem;
   width: 100%;
 }
+
 #match_success {
   width: 100%;
   height: 100%;
@@ -457,6 +372,7 @@ html,
   display: none;
   background: rgba(0, 0, 0, 0.8);
 }
+
 .gameover {
   width: 100%;
   height: 100%;
@@ -467,114 +383,101 @@ html,
   display: none;
   background: rgba(0, 0, 0, 0.7);
 }
+
 .gameover .overbg {
   background: url(../img/GAME-OVER.png) no-repeat;
-  height: 79px;
-  width: 519px;
+  height: 7.9rem;
+  width: 51.9rem;
   position: absolute;
-  left: 50px;
-  top: 460px;
+  left: 5rem;
+  top: 46rem;
 }
+
 .player {
   background-image: url(../img/sprite.png);
-  background-position: 0px -354px;
-  width: 382px;
-  height: 545px;
+  background-position: 0 -35.4rem;
+  width: 38.2rem;
+  height: 54.5rem;
   position: absolute;
-  left: 224px;
-  top: 333px;
-  display: none;
+  left: 22.4rem;
+  top: 33.3rem;
 }
-.player.animated {
-  display: block;
-  -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
-}
+
 .sohu {
   background-image: url(../img/sprite.png);
-  background-position: -714px -1030px;
-  width: 114px;
-  height: 57px;
+  background-position: -71.4rem -103rem;
+  width: 11.4rem;
+  height: 5.7rem;
   position: absolute;
-  left: 20px;
-  top: 20px;
+  left: 2rem;
+  top: 2rem;
 }
+
 .titleGame {
   background-image: url(../img/sprite.png);
-  background-position: -640px -899px;
-  width: 557px;
-  height: 128px;
+  background-position: -64rem -89.9rem;
+  width: 55.7rem;
+  height: 12.8rem;
   position: absolute;
-  left: 47px;
-  top: 76px;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
+  left: 4.7rem;
+  top: 7.6rem;
   display: none;
 }
-.titleGame.animated {
+
+.titleGame.active {
   display: block;
-  -webkit-animation-duration: 0.7s;
-          animation-duration: 0.7s;
 }
+
 .title_doc {
   background-image: url(../img/sprite.png);
-  background-position: -376px -1030px;
-  width: 338px;
-  height: 66px;
+  background-position: -37.6rem -103rem;
+  width: 33.8rem;
+  height: 6.6rem;
   position: absolute;
-  left: 225px;
-  top: 225px;
-  display: none;
+  left: 22.5rem;
+  top: 22.5rem;
 }
-.title_doc.animated {
-  display: block;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-}
+
 .start {
   background-image: url(../img/sprite.png);
-  background-position: -1022px -354px;
-  width: 244px;
-  height: 119px;
+  background-position: -102.2rem -35.4rem;
+  width: 24.4rem;
+  height: 11.9rem;
   position: absolute;
-  left: 160px;
-  top: 832px;
+  left: 16rem;
+  top: 83.2rem;
 }
-.start.animated {
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-}
+
 .single {
   background-image: url(../img/sprite.png);
-  background-position: -983px -821px;
-  width: 213px;
-  height: 52px;
+  background-position: -98.3rem -82.1rem;
+  width: 21.3rem;
+  height: 5.2rem;
   position: absolute;
-  left: 20px;
-  top: 395px;
+  left: 2rem;
+  top: 39.5rem;
 }
+
 .single.active {
   background-image: url(../img/sprite.png);
-  background-position: -1022px -623px;
-  width: 213px;
-  height: 52px;
+  background-position: -102.2rem -62.3rem;
+  width: 21.3rem;
+  height: 5.2rem;
 }
+
 .double {
   background-image: url(../img/sprite.png);
-  background-position: -1022px -742px;
-  width: 213px;
-  height: 52px;
+  background-position: -102.2rem -74.2rem;
+  width: 21.3rem;
+  height: 5.2rem;
   position: absolute;
-  left: 20px;
-  top: 460px;
+  left: 2rem;
+  top: 46rem;
 }
+
 .double.active {
   background-image: url(../img/sprite.png);
-  background-position: -1022px -690px;
-  width: 213px;
-  height: 52px;
+  background-position: -102.2rem -69rem;
+  width: 21.3rem;
+  height: 5.2rem;
 }

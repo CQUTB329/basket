@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
 
-  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel="stylesheet" type="text/css" href="./css/style.min.css">
+  <link rel="stylesheet" href="http://news.sohu.com/upload/moban3/css/animate.min.css">
 
   <style type="text/css">
     /*声明 WebFont*/
@@ -52,7 +53,7 @@ body{
   font-family: 'FZLTCH';
 }
   </style>
-  <title>奥运会跑步</title>
+  <title>飙分大战！你能投中多少三分球</title>
 
 </head>
 
@@ -82,8 +83,6 @@ body{
 
   <script type="text/javascript">
 
-   
-
     function pageUtil(selector){
       this.ele = document.querySelectorAll(selector)[0];
       this.scaleNum = document.documentElement.clientWidth/640;
@@ -105,10 +104,9 @@ body{
     new pageUtil(".loading").response();
       var loader = new resLoader({
       resources: [
-        'http://sports.sohu.com/upload/yursile/running1/img/players.png',
-        'http://sports.sohu.com/upload/yursile/running1/img/page1.png',
-        'http://sports.sohu.com/upload/yursile/running1/img/resultbg.png',
-        'http://sports.sohu.com/upload/yursile/running1/img/results.png',
+        'http://sports.sohu.com/upload/yursile/basket0/img/players.png',
+        'http://sports.sohu.com/upload/yursile/basket0/img/page1.png',
+        'http://sports.sohu.com/upload/yursile/basket0/img/resultbg.png'
       ],
       onStart: function(total) {},
       onProgress: function(current, total) {
@@ -119,6 +117,7 @@ body{
       onComplete: function(total) {
         
         document.querySelector('.loading').style.display = "none";
+        startAnimate();
       }
     });
     loader.start();
@@ -126,7 +125,12 @@ body{
     window.pas = new pageUtil(".gameWrapper");
     pas.response();
 
-
+    function startAnimate(){
+      document.querySelector(".titleGame").className = "bounceInRight animated titleGame";
+      document.querySelector(".player").className = "slideInUpRight animated player";  
+      document.querySelector(".start").className = "breath animated start"; 
+      document.querySelector(".title_doc").className = "fadeIn animated title_doc"; 
+    }
      
   </script>
 
@@ -182,7 +186,9 @@ body{
   </div>
 
   <div id="result">
-    <div style="display:none">0123456789.你在穿杨射柳的比赛中击中XX飞碟，枪法堪比王义夫、许海峰、杜丽、庞伟，人名随机。枪法堪比黄忠、许三多、后羿、小李广花荣，人名随机枪法堪比特种兵、雪豹突击队，人名随机枪法还需多加练习……这枪法简直没谁了……我</div>
+    <div style="display:none">0123456789.
+      砍下55分
+    </div>
     <div class="wrapper">
       <div class="shooted">投篮比赛您投中：</div>
       <div id="main_num">36枚</div>
@@ -194,12 +200,15 @@ body{
 
       <div class="agian"></div>
       <div class="share"></div>
-      <div class="basketbal" data-url="#"></div>
-      <div class="shooting" data-url="#"></div>
+      <div class="running" data-url="http://m.sohu.com/c/19580/"></div>
+      <div class="shooting" data-url="http://m.sohu.com/c/19690/"></div>
     </div>
 
     <div class="shareCover">
         <div class="shareFlag"></div>
+          <div class="share_ewm">
+          <img src="./img/ewm.png" alt="">
+        </div>
     </div>
   </div>
 
@@ -207,8 +216,6 @@ body{
 
 </body>
 
-
-<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script> -->
 <script type="text/javascript">
   new pageUtil(".page1").response();
   new pageUtil("#result").response();
@@ -220,7 +227,7 @@ body{
 
 
 
-  document.querySelector(".agian").addEventListener("click",function(){
+  document.querySelector(".agian").addEventListener("touchstart",function(){
     document.querySelector("#result").style.display = "none";
     document.querySelector(".page1").style.display = "block";
     document.querySelector(".second_s").style.display = "none";
@@ -228,7 +235,7 @@ body{
   },false);
 
 
-  document.querySelector("#specification1 .shoot").addEventListener("click",function(){
+  document.querySelector("#specification1 .shoot").addEventListener("touchstart",function(){
       document.querySelector("#specification1").style.display = "none";
       window.game.ready();
   },false);
@@ -237,26 +244,26 @@ body{
   //     window.game.readyToPlay();
   // },false);
 
-  document.querySelector(".run").addEventListener("click",function(){
+  document.querySelector("#match_success .run").addEventListener("touchstart",function(){
       window.game.readyToPlay();
   },false);
 
-  document.querySelector("#specification2 .close").addEventListener("click",function(){
+  document.querySelector("#specification2 .close").addEventListener("touchstart",function(){
       document.querySelector("#specification2").style.display = "none";
   },false);
 
-  document.querySelector(".basketbal").addEventListener("click",function(){
+  document.querySelector(".running").addEventListener("click",function(){
     document.location.href = this.dataset.url;
   },false)
   document.querySelector(".shooting").addEventListener("click",function(){
     document.location.href = this.dataset.url;
   },false)
 
-  document.querySelector(".share").addEventListener("click",function(){
+  document.querySelector(".share").addEventListener("touchstart",function(){
     document.querySelector(".shareCover").style.display= "block";
   },false)
 
-  document.querySelector(".shareCover").addEventListener("click",function(){
+  document.querySelector(".shareCover").addEventListener("touchstart",function(){
     document.querySelector(".shareCover").style.display= "none";
   },false)
 
@@ -267,6 +274,99 @@ body{
 
 </script>
 <script type="text/javascript" src="./js/qrcode.min.js"></script>
-<script type="text/javascript" src="./js/bundle.js"></script>
+<script type="text/javascript" src="./js/bundle.min.js"></script>
+
+
+
+  <!-- 分享 -->
+  <script src="http://news.sohu.com/upload/commonzzx/share.js"></script>
+  <!-- 统计流量 -->
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "http://hm.baidu.com/hm.js?c154d502f02b12a996c34a02281a3bff";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
+
+  <script>
+    appid = "";
+    gSound = '';
+    var shareDetail = {
+      'imgUrl': 'http:'+'//news.sohu.com/upload/sharepic/basket.png',
+      'link':  "http:"+"//m.sohu.com/c/19691/",
+      'title': '飙分大战！你能投中多少三分球',
+      'content': '你是神射手还是铁王？'
+    }
+
+  function shareFriend() {
+    WeixinJSBridge.invoke("sendAppMessage", {
+      appid: appid,
+      img_url: shareDetail.imgUrl,
+      img_width: "200",
+      img_height: "200",
+      link: shareDetail.link,
+      desc: shareDetail.content,
+      title: shareDetail.title
+    }, function(b) {})
+  }
+
+  function shareTimeline() {
+    WeixinJSBridge.invoke("shareTimeline", {
+      appid: appid,
+      img_url: shareDetail.imgUrl,
+      img_width: "200",
+      img_height: "200",
+      link: shareDetail.link,
+      desc: shareDetail.content,
+      title: shareDetail.content
+    }, function(b) {})
+  }
+
+  function shareWeibo() {
+    WeixinJSBridge.invoke("shareWeibo", {
+      content: shareDetail.content,
+      url: shareDetail.link
+    }, function(b) {})
+  }
+  document.addEventListener("WeixinJSBridgeReady", function onBridgeReady() {
+    WeixinJSBridge.on("menu:share:appmessage", function(b) {
+      shareFriend();
+    });
+    WeixinJSBridge.on("menu:share:timeline", function(b) {
+      shareTimeline();
+    });
+    WeixinJSBridge.on("menu:share:weibo", function(b) {
+      shareWeibo();
+    })
+  }, false);
+
+  
+  </script>
+
+  <script language="javascript" src="http://a1.itc.cn/pv/js/spv.1309051632.js"></script>
+  <script language="javascript" src="http://js.sohu.com/wrating20120726.js"></script>
+  <script language="javascript"> 
+    var  _wratingId = null;
+    try{
+    _wratingId = _getAcc();
+    }catch(e){}
+    if(_wratingId !=null){
+    document.write('<scr'+'ipt type="text/javascript" src="http://sohu.wrating.com/a1.js"></scr'+'ipt>');
+    }
+    </script>
+    <script language="javascript"> 
+    if(_wratingId !=null){
+    document.write('<scr'+'ipt type="text/javascript">');
+    document.write('var vjAcc="'+_wratingId+'";');
+    document.write('var wrUrl="http://sohu.wrating.com/";');
+    document.write('try{vjTrack();}catch(e){}');
+    document.write('</scr'+'ipt>');
+    }
+  </script>
+
+
 
 </html>

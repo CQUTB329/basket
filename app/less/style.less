@@ -1,5 +1,5 @@
 @import "sprite.less";
-
+@import "loading.less";
 
 body,html,#gameWrapper,.main,.wrap{
   width: 100%;
@@ -8,6 +8,44 @@ body,html,#gameWrapper,.main,.wrap{
 *{
   margin:0;
   padding:0;
+}
+
+.breath{
+  animation-name:breath;
+  @keyframes breath{
+    0%{
+      opacity: 1
+    }
+
+    40%{
+      opacity: 0.5
+    }
+
+    80%{
+      opacity: 1
+    }
+
+  
+    100%{
+      opacity: 1;
+    }
+  }
+}
+
+.slideInUpRight{
+  animation-name:slideInUpRight;
+  @keyframes slideInUpRight{
+    from{
+      transform:translate3d(3000px,3000px,0)
+    }
+
+    to{
+      transform:translate3d(0,0,0)
+    }
+  }
+}
+.animate_a(){
+  transform:translateZ(0)
 }
 
 .abs(@l:0,@t:0){
@@ -41,7 +79,7 @@ body,html,#gameWrapper,.main,.wrap{
 #result{
   .wrap();
 
-   background: rgb(255, 212, 90);
+   // background: rgb(255, 212, 90);
   z-index: 10;
   display: none;
 
@@ -77,6 +115,7 @@ body,html,#gameWrapper,.main,.wrap{
 .page1{
   .wrap();
   background: url(../img/page1.jpg) no-repeat;
+  .animate_a();
   // display: none;
 }
 
@@ -94,7 +133,7 @@ body,html,#gameWrapper,.main,.wrap{
   top:0;
   z-index: 100;
   display: none;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 
   .shareFlag{
 
@@ -102,6 +141,16 @@ body,html,#gameWrapper,.main,.wrap{
     right: 50px;
     top:20px;
     .sprite(@share);
+  }
+
+
+  .share_ewm{
+    .abs_box(450px);
+    width: 280px;
+    height: 328px;
+    img{
+      width: 100%;
+    }
   }
 }
 
@@ -157,6 +206,7 @@ body,html,#gameWrapper,.main,.wrap{
   color:#fff;
   top: 378px;
   width: 100%;
+  line-height: 41px;
 }
 
 #specification1{
@@ -195,7 +245,7 @@ body,html,#gameWrapper,.main,.wrap{
   height: 750-650px;
 }
 
-.basketbal{
+.running{
   left: 50px;
   top:770-60+60px;
   width: 295-50px;
@@ -221,7 +271,7 @@ body,html,#gameWrapper,.main,.wrap{
 .second_s{
   display: none;
   font-family: FZLTCH;
-  color:#ee842c;
+  color:#fed700;
   font-size: 30px;
   .abs_text(340px);
   #second_num{
@@ -324,9 +374,16 @@ body,html,#gameWrapper,.main,.wrap{
 
 
 
+
 .player{
   .sprite(@player);
   .abs(224px,333px);
+  display: none;
+  &.animated{
+    display: block;
+    animation-duration:0.5s;
+    animation-delay:0.5s;
+  }
 }
 
 .sohu{
@@ -337,16 +394,34 @@ body,html,#gameWrapper,.main,.wrap{
 .titleGame{
   .sprite(@title);
   .abs(47px,76px);
+  .animate_a();
+
+  display: none;
+  &.animated{
+    display: block;
+    animation-duration:0.7s;
+  }
+
 }
 .title_doc{
 
   .sprite(@title-doc);
   .abs(225px,225px);
+  display: none;
+  &.animated{
+    display: block;
+    animation-duration:2s;
+  }
 }
 
 .start{
   .sprite(@start);
-  .abs(160px,832px)
+  .abs(160px,832px);
+  // display: none;
+  &.animated{
+    animation-iteration-count:infinite;
+    animation-duration:2s;
+  }
 }
 
 .single{

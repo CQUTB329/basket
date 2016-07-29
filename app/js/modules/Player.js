@@ -83,7 +83,8 @@ Player.prototype.hold = function(){
 
 Player.prototype.pickUp = function(){
 	this.ball = this.balls.pop();
-	this.ball.alpha = 1;
+	if(this.ball)
+		this.ball.alpha = 1;
 	// this.stage.addChild(this.ball);
 }
 module.exports = Player;

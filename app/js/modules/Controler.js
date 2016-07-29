@@ -39,7 +39,6 @@ class Controler{
 
 	shoot(){
 		if(this.shootable){
-			console.log(this.arrow.position.y);
 			if(this.arrow.position.y<S_START){
 				this.player.shoot(1);
 			}else if(this.arrow.position.y>S_END){
